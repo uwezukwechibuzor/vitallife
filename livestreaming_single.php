@@ -100,10 +100,13 @@ src="<?= $livestreaming_row['url'] ?>">
 
 <div class="single-latest-post">
 <hr>
+<?php if(is_array($livestreaming_rows)){ ?>
 <?php foreach($livestreaming_rows as $row){ ?>
 <a href="livestreaming_single.php?id=<?= $row['id'] ?>"><h6><?= $row['topic'] ?></h6></a>
 <hr>
 <?php } ?>
+<?php }else{ ?>
+    <?php } ?>
 </div>
 
 

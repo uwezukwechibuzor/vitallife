@@ -6,7 +6,8 @@
 
  global $db, $download_rows,  $status, $v, $videos_rows;
 
-global $db, $livestreaming_rows,  $status;
+global $db, $livestreaming_rows,  $status, $blog_rows;
+
 
     
   display_downloads_index();
@@ -21,13 +22,15 @@ display_events_index();
 
 display_liveStreaming_index();
 
+display_blogs_index();
+
+
 ?>
 
 <?php require_once "header.php"; ?>
 
 
-
-
+<div class="fb-post" data-href="https://www.facebook.com/20531316728/posts/10154009990506729/" data-width="500"></div>
 <section class="hero-area hero-post-slides owl-carousel">
 
 <div class="single-hero-slide bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/vitalife2.jpg); width: 100%; object-fit:cover">
@@ -92,7 +95,7 @@ display_liveStreaming_index();
 <div class="row about-content justify-content-center">
 <div class="col-12 col-md-6 col-lg-4">
 <div class="about-us-content mb-100">
-<img src="img/bg-img/3.jpg" alt="" style=" width: 100%; height: 200px; object-fit:cover" >
+<img src="img/bg-img/ba.jpg" alt="" style=" width: 100%; height: 200px; object-fit:cover" >
 <div class="about-text">
 <!-- <h4>Our Church</h4>
 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
@@ -103,7 +106,7 @@ display_liveStreaming_index();
 
 <div class="col-12 col-md-6 col-lg-4">
 <div class="about-us-content mb-100">
-<img src="img/bg-img/4.jpg" alt="" style=" width: 100%; height: 200px; object-fit:cover" >
+<img src="img/bg-img/ba1.jpg" alt="" style=" width: 100%; height: 200px; object-fit:cover" >
 <div class="about-text">
 <!-- <h4>Our History</h4>
 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
@@ -114,7 +117,7 @@ display_liveStreaming_index();
 
 <div class="col-12 col-md-6 col-lg-4">
 <div class="about-us-content mb-100">
-<img src="img/bg-img/5.jpg" alt="" style=" width: 100%; height: 200px; object-fit:cover" >
+<img src="img/bg-img/ba2.jpg" alt="" style=" width: 100%; height: 200px; object-fit:cover" >
 <div class="about-text">
 <!-- <h4>Our Sermons</h4>
 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
@@ -127,13 +130,13 @@ display_liveStreaming_index();
 </section>
 
 
-<section class="call-to-action-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/6.jpg)">
+<section class="call-to-action-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/ba1.jpg)">
 <div class="container">
 <div class="row">
 <div class="col-12">
 <div class="call-to-action-content text-center">
-<h2>What We Do</h2>
-<h2>Preaching The Gospel Of Jesus Christ With Our Gifts And Talents <br> We are One Family in Christ</h2>
+<h2 class="text-primary">What We Do</h2>
+<h4 class="text-light">Preaching The Gospel Of Jesus Christ With Our Gifts And Talents <br> We are One Family in Christ</h4>
 <a href="member.php" class="btn crose-btn btn-2">Become A Member</a>
 </div>
 </div>
@@ -148,12 +151,13 @@ display_liveStreaming_index();
 
 <div class="col-12">
 <div class="section-heading">
-<h2>Latest Sermons</h2>
+<h2>Latest VLF Uploads</h2>
 <p>Loaded with fast-paced worship, activities and video teachings</p>
 </div>
 </div>
 </div>
 <div class="row justify-content-center">
+<?php if(is_array($download_rows)){ ?>
 <?php foreach($downloads_rows as $row){ ?>
   <div class="col-12 col-sm-6 col-lg-4">
 <div class="single-latest-sermons mb-100">
@@ -180,11 +184,13 @@ display_liveStreaming_index();
 </div>
 </div>
 <?php } ?>
-
+<?php }else{ ?>
+    <?php } ?>
 </div>
 
 
 <div class="row justify-content-center">
+<?php if(is_array($videos_rows)){ ?>
 <?php foreach($videos_rows as $row){ ?>
   <div class="col-12 col-sm-6 col-lg-4">
 
@@ -218,11 +224,13 @@ Your browser does not support the video tag.
 </div>
 </div>
 <?php } ?>
-
+<?php }else{ ?>
+    <?php } ?>
 
 </div>
 
 <div class="row justify-content-center">
+<?php if(is_array($livestreaming_rows)){ ?>
 <?php foreach($livestreaming_rows as $row){ ?>
   <div class="col-12 col-sm-6 col-lg-4">
 
@@ -255,47 +263,11 @@ src="<?= $row['url'] ?>">
 </div>
 </div>
 <?php } ?>
-
-
+<?php }else{ ?>
+    <?php } ?>
 </div>
 </div>
 </section>
-
-
-<section class="about-area section-padding-100-0">
-<div class="container">
-<div class="row">
-
-<div class="col-12">
-<div class="section-heading">
-<h2>Bible Reading Strategy</h2>
-</div>
-</div>
-</div>
-<div class="row about-content justify-content-center">
-<?php foreach($rows as $row){ ?>
-<div class="col-12 col-md-6 col-lg-4">
-<div class="about-us-content mb-100">
-<img src="admin/<?= $row['pic'] ?>" alt="" style="" >
-<div class="about-text">
-<!-- <h4>Our Church</h4>
-<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-<a href="#">Read More <i class="fa fa-angle-double-right"></i></a> -->
-</div>
-</div>
-</div>
-<?php } ?>
-
-</div>
-</div>
-</section>
-
-
-
-
-
-
-
 
 
 
@@ -319,6 +291,7 @@ src="<?= $row['url'] ?>">
 <div class="container">
 <div class="row">
 <div class="col-12">
+<?php if(is_array($events_rows)){ ?>
 <?php foreach($events_rows as $row){ ?>
 <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
 
@@ -344,7 +317,8 @@ src="<?= $row['url'] ?>">
 
 </div>
 <?php } ?>
-
+<?php }else{ ?>
+    <?php } ?>
 
 
 </div>
@@ -363,71 +337,42 @@ src="<?= $row['url'] ?>">
 <div class="col-12">
 <div class="section-heading">
 <h2>Latest News</h2>
-<p>Latest information on religion, church, politics revolves around us</p>
+<p>Latest information on religion, church, and your talents</p>
 </div>
 </div>
 </div>
 <div class="row justify-content-center">
-
+<?php if(is_array($blog_rows)){ ?>
+ <?php foreach($blog_rows as $row){ ?>
 <div class="col-12 col-md-6 col-lg-4">
 <div class="single-blog-post mb-100">
 <div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/10.jpg" alt=""></a>
+<a href="single-post.php?id=<?= $row['id'] ?>"><img src="admin/<?= $row['pic'] ?>" alt=""></a>
 </div>
 <div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>Mexican priest murdered in his church</h4>
+<a href="single-post.php?id=<?= $row['id'] ?>" class="post-title">
+<h4><?= $row['title'] ?></h4>
 </a>
 <div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Luke Coppen</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 23, 2018</a>
+<a href="#"><i class="fa fa-user" aria-hidden="true"></i><?= $row['author'] ?></a>
+<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><?= $row['created_at'] ?></a>
 </div>
-<p class="post-excerpt">The priest, who was also the diocesan judicial vicar, was accosted by the assailant and was involved in a discussion.</p>
+<p class="post-excerpt"><?= substr($row['body'], 0, 150).'.....' ?></p>
+<a href="single-post.php?id=<?= $row['id'] ?>">Read More</a>
 </div>
 </div>
 </div>
+<?php } ?>
+<?php }else{ ?>
+    <?php } ?>
 
-<div class="col-12 col-md-6 col-lg-4">
-<div class="single-blog-post mb-100">
-<div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/11.jpg" alt=""></a>
-</div>
-<div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>A daily guide to what's open in the Catholic Church</h4>
-</a>
-<div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Staff Reporter</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 03, 2018</a>
-</div>
-<p class="post-excerpt">The Liturgy helps us to “rediscover our identity as disciples of the Risen Lord”, Pope Francis said at the Regina Caeli.</p>
-</div>
-</div>
-</div>
-
-<div class="col-12 col-md-6 col-lg-4">
-<div class="single-blog-post mb-100">
-<div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/12.jpg" alt=""></a>
-</div>
-<div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>The Bishop of Dromore was right to resign.</h4>
-</a>
-<div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Lucie Smith</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 15, 2018</a>
-</div>
-<p class="post-excerpt">God comes to us in free and undeserved favor in the person of Jesus Christ who lived, died, and rose for us that we might belong to God.</p>
-</div>
-</div>
-</div>
 </div>
 </div>
 </section>
 
 
 <div class="gallery-area d-flex flex-wrap">
+<?php if(is_array($gallery_rows)){ ?>
 <?php foreach($gallery_rows as $row){ ?>
 <div class="single-gallery-area">
 <a href="admin/<?= $row['pic'] ?>" class="gallery-img" title="<?= $row['pic'] ?>">
@@ -435,6 +380,8 @@ src="<?= $row['url'] ?>">
 </a>
 </div>
 <?php } ?>
+<?php }else{ ?>
+    <?php } ?>
 </div>
 
 <!-- <section class="subscribe-area">

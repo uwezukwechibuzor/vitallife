@@ -444,13 +444,15 @@ function deleteAdmin($request){
              //meet our team
              function meet_our_team($request)
              {
-                 global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $fullname, $position, $success;
+                 global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $fullname, $position, $success, $facebook, $twitter;
                               
                  if (empty($request['fullname']) || empty($request['position'])) {
                      $error = "Field cannot be empty";
                  } else {
                      $fullname = $request['fullname'];
                      $position = $request['position'];
+                     $facebook = $request['facebook'];
+                     $twitter = $request['twitter'];
 
                      //file upload file name
                      $file = $_FILES['file'];
@@ -477,12 +479,12 @@ function deleteAdmin($request){
                                         } else {
                         
                                  //Insert to database
-                             $sql = "INSERT INTO meet_our_team (full_name, position, pic) VALUES (?,?,?)";
+                             $sql = "INSERT INTO meet_our_team (full_name, position, pic, facebook, twitter) VALUES (?,?,?,?,?)";
                      
                              if ($stmt = mysqli_prepare($db, $sql)) {
                               
                                 //bind values to the prepared statement
-                                 mysqli_stmt_bind_param($stmt, "sss", $fullname, $position, $fileNameNew);
+                                 mysqli_stmt_bind_param($stmt, "sssss", $fullname, $position, $fileNameNew, $facebook, $twitter);
                                  if (mysqli_stmt_execute($stmt)) {
                                       $success = " Team Added Successfully";            
                       
@@ -629,8 +631,9 @@ function delete_verse($request){
              //galleries
              function galleries($request)
              {
-                 global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error,  $fileNameNew, $fileDestination, $success, $key, $image;
-              
+                 global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error,  $fileNameNew, $fileDestination, $success, $key, $image, $links;
+
+                     $links = $request['links'];
                  //file upload file name
                  foreach ($_FILES['file']['tmp_name'] as $key => $image) {
                      $file = $_FILES['file'];
@@ -656,12 +659,12 @@ function delete_verse($request){
                                  } else {
                         
                                  //Insert to database
-                                     $sql = "INSERT INTO galleries (pic) VALUES (?)";
+                                     $sql = "INSERT INTO galleries (pic, links) VALUES (?,?)";
                      
                                      if ($stmt = mysqli_prepare($db, $sql)) {
                               
                                 //bind values to the prepared statement
-                                         mysqli_stmt_bind_param($stmt, "s", $fileName);
+                                         mysqli_stmt_bind_param($stmt, "ss", $fileName, $links);
                                          if (mysqli_stmt_execute($stmt)) {
                                              $success = "Added Successfully";
                                          }
@@ -696,7 +699,7 @@ function display_galleries(){
 function display_galleries_index(){
     global $db, $row, $gallery_rows, $row, $status;
     $status = "true";
-        $sql = "SELECT  * FROM galleries WHERE status =? ORDER BY id Desc LIMIT 20";
+        $sql = "SELECT  * FROM galleries WHERE status =? ORDER BY id Desc LIMIT 10";
         if ($stmt = mysqli_prepare($db, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $status);
@@ -887,7 +890,7 @@ function member($request)
                     
                                 
                
-                  //teams
+                  //events
                   function events($request)
                   {
                       global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $address, $details, $file_err, $topic_error,  $time_error, $address_error, $details_error, $date, $date_error;
@@ -1112,7 +1115,7 @@ function delete_events($request){
                   }
               }
 
-  //livestreaming
+  //Youtube livestreaming
   function liveStreaming($request)
   {
       global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $speaker, $category, $file_err, $topic_error,  $category_error, $speaker_error, $file1, $fileName1, $fileTmpName1, $fileSize1, $fileError1, $fileType1, $fileExt1, $fileActualExt1, $allowed1, $error1, $image1,  $fileNameNew1, $fileDestination1, $url, $url_error;
@@ -1532,6 +1535,435 @@ if (file_exists($filepath)) {
          }
 
         
+
+
+
+
+         //blogs
+                  function blog($request)
+                  {
+                      global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $success, $title, $body, $author, $file_err, $title_error, $body_error;
+                     
+                      $title = $request['title'];
+                      $author = $request['author'];
+                      $body = $request['body'];
+
+                      if (empty($title)) {
+                          $title_error = "This field is required";
+                      }
+                            
+                            
+                      if (empty($body)) {
+                          $body_error = "This field is required";
+                      }
+                            
+                          //file upload file name
+                          $file = $_FILES['file'];
+                          $fileName = $_FILES['file']['name'];
+                          $fileTmpName = $_FILES['file']['tmp_name'];
+                          $fileSize = $_FILES['file']['size'];
+                          $fileError = $_FILES['file']['error'];
+                          $fileType = $_FILES['file']['type'];
+                  
+                          $fileExt = explode('.', $fileName);
+                          $fileActualExt = strtolower(end($fileExt));
+                  
+                          $allowed = array('jpg', 'jpeg', 'png');
+                      
+                          if (in_array($fileActualExt, $allowed)) {
+                              if ($fileError === 0) {
+                                  if ($fileSize < 10000000) {
+                                      $fileNameNew = uniqid('', true).".".$fileActualExt;
+                                      $fileDestination = 'admin/img/'.$fileNameNew;
+                                      move_uploaded_file($fileTmpName, $fileNameNew);
+                                  
+                                      if (empty($fileNameNew)) {
+                                          $file_err = "No file Was choosen";
+                                      } else {
+                             
+                                      //Insert to database
+                                          $sql = "INSERT INTO blog
+                                           (title, body, author,pic) VALUES (?,?,?,?)";
+                          
+                                          if ($stmt = mysqli_prepare($db, $sql)) {
+                                   
+                                     //bind values to the prepared statement
+                                              mysqli_stmt_bind_param($stmt, "ssss", $title, $body, $author, $fileNameNew);
+                                              if (mysqli_stmt_execute($stmt)) {
+                                                  $success = " Post Added Successfully";
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                
+             //displaying blog post
+                    function display_blogs(){
+                        global $db, $blog_rows,  $status;
+                        $status = "true";
+                            $sql = "SELECT  * FROM blog WHERE status =? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $status);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                    $blog_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+
+                    function display_blogs_col(){
+                        global $db, $blog_rows_col,  $status;
+                        $status = "true";
+                            $sql = "SELECT  * FROM blog WHERE status =? ORDER BY id DESC LIMIT 8";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $status);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                    $blog_rows_col = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+
+                    function display_blogs_index(){
+                        global $db, $blog_rows,  $status;
+                        $status = "true";
+                            $sql = "SELECT  * FROM blog WHERE status =? ORDER BY id DESC LIMIT 3";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $status);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                    $blog_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+                  
+
+                           //delete blog
+            function delete_blog($request){
+                global $db, $id;
+               if(isset($_GET['id'])){
+                   $id = $_GET['id'];
+            
+                   $sql = "DELETE  FROM blog WHERE id =?";
+                   if($stmt = mysqli_prepare($db, $sql)){
+                        mysqli_stmt_bind_param($stmt, "i", $id);
+                        if(mysqli_stmt_execute($stmt)){
+                            header("location:blog.php");
+                        }
+                   }
+               }
+            
+            }
+
+    
+
+                          //displaying details to be edited in the blog post
+                          function display_blog_edit(){
+                            global $db, $blog_row,  $id;
+                            $status = "true";
+                            if(isset($_GET['id'])){
+                                $id = $_GET['id'];
+    
+                                $sql = "SELECT  * FROM blog WHERE id =?";
+                                if ($stmt = mysqli_prepare($db, $sql)) {
+                                    // Bind variables to the prepared statement as parameters
+                                    mysqli_stmt_bind_param($stmt, "i", $id);
+                                    // Attempt to execute the prepared statement
+                                    if (mysqli_stmt_execute($stmt)) {
+                                        // Store result
+                                        $result =  mysqli_stmt_get_result($stmt);
+                                        // Check if data exists, if yes display data
+                                        if (mysqli_num_rows($result)) {
+                                            $blog_row = mysqli_fetch_assoc($result);
+                                
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                          //updating blog post
+                          function update_blog($request){
+                            global $db, $blog_row,  $id, $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $success, $title, $body, $author, $file_err, $title_error, $body_error;
+                            $status = "true";
+
+                            if(isset($_GET['id'])){
+                                $id = $_GET['id'];
+
+                     
+                                $title = $request['title'];
+                                $author = $request['author'];
+                                $body = $request['body'];
+          
+                                if (empty($title)) {
+                                    $title_error = "This field is required";
+                                }
+                                      
+                                      
+                                if (empty($body)) {
+                                    $body_error = "This field is required";
+                                }
+                                      
+                                    //file upload file name
+                                    $file = $_FILES['file'];
+                                    $fileName = $_FILES['file']['name'];
+                                    $fileTmpName = $_FILES['file']['tmp_name'];
+                                    $fileSize = $_FILES['file']['size'];
+                                    $fileError = $_FILES['file']['error'];
+                                    $fileType = $_FILES['file']['type'];
+                            
+                                    $fileExt = explode('.', $fileName);
+                                    $fileActualExt = strtolower(end($fileExt));
+                            
+                                    $allowed = array('jpg', 'jpeg', 'png');
+                                
+                                    if (in_array($fileActualExt, $allowed)) {
+                                        if ($fileError === 0) {
+                                            if ($fileSize < 10000000) {
+                                                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                                                $fileDestination = 'admin/img/'.$fileNameNew;
+                                                move_uploaded_file($fileTmpName, $fileNameNew);
+                                            
+                                                if (empty($fileNameNew)) {
+                                                    $file_err = "No file Was choosen";
+                                                } else {
+                                       
+    
+                                $sql = "UPDATE blog SET title=?, body=?, author=?, pic=? WHERE id =?";
+                                if ($stmt = mysqli_prepare($db, $sql)) {
+                                    // Bind variables to the prepared statement as parameters
+                                    mysqli_stmt_bind_param($stmt, "ssssi",$title, $body, $author, $fileNameNew,  $_GET['id']);
+                                    // Attempt to execute the prepared statement
+                                    if(mysqli_stmt_execute($stmt)){
+                                        $success = 'Post Updated Successfully';
+                                        header("location: blog.php?success=$success");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+     
+        
+         //comments for each blog
+         function comment($request)
+         {
+             global $db,$id,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $success, $name, $body, $author, $file_err, $name_error, $body_error;
+               
+             if(isset($_GET['id'])){
+                 $id = $_GET['id'];
+
+             $name = $request['full_name'];
+             $body = $request['body'];
+
+             if (empty($name)) {
+                 $name_error = "This field is required";
+             }
+                   
+                   
+             if (empty($body)) {
+                 $body_error = "This field is required";
+             }
+                   
+                 //file upload file name
+                 $file = $_FILES['file'];
+                 $fileName = $_FILES['file']['name'];
+                 $fileTmpName = $_FILES['file']['tmp_name'];
+                 $fileSize = $_FILES['file']['size'];
+                 $fileError = $_FILES['file']['error'];
+                 $fileType = $_FILES['file']['type'];
+         
+                 $fileExt = explode('.', $fileName);
+                 $fileActualExt = strtolower(end($fileExt));
+         
+                 $allowed = array('jpg', 'jpeg', 'png');
+             
+                 if (in_array($fileActualExt, $allowed)) {
+                     if ($fileError === 0) {
+                         if ($fileSize < 1000000) {
+                             $fileNameNew = uniqid('', true).".".$fileActualExt;
+                             $fileDestination = 'admin/img/'.$fileNameNew;
+                             move_uploaded_file($fileTmpName, $fileNameNew);
+                        
+                    
+                             //Insert to database
+                                 $sql = "INSERT INTO blog_comments
+                                  (full_name, body, pic, blog_id) VALUES (?,?,?,?)";
+                 
+                                 if ($stmt = mysqli_prepare($db, $sql)) {
+                          
+                            //bind values to the prepared statement
+                                     mysqli_stmt_bind_param($stmt, "sssi", $name, $body,$fileNameNew, $id);
+                                     if (mysqli_stmt_execute($stmt)) {
+                                         $success = "";
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+               
+                     //displaying details to be edited in the blog post
+                     function display_comments(){
+                        global $db, $comments,  $id;
+                        $status = "true";
+                        if(isset($_GET['id'])){
+                            $id = $_GET['id'];
+
+                            $sql = "SELECT  * FROM blog_comments WHERE blog_id =?";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "i", $id);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+                    }
+            
+                     //member
+                     function display_comment_admin(){
+                        global $db, $rows, $row, $status;
+                        $status = "true";
+                             $sql = "SELECT  * FROM blog_comments WHERE status =? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $status);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+
+                     
+                                        //delete blog
+            function delete_comments($request){
+                global $db, $id;
+               if(isset($_GET['id'])){
+                   $id = $_GET['id'];
+            
+                   $sql = "DELETE  FROM blog_comments WHERE id =?";
+                   if($stmt = mysqli_prepare($db, $sql)){
+                        mysqli_stmt_bind_param($stmt, "i", $id);
+                        if(mysqli_stmt_execute($stmt)){
+                            header("location:comments.php");
+                        }
+                   }
+               }
+            
+            }
+
+
+
+            //facebook Livstreaming
+            function liveStreaming_facebook($request)
+  {
+      global $db, $livestreaming, $livestreaming_error, $success;
+     
+      $livestreaming = $request['livestreaming'];
+            
+      if (empty($livestreaming)) {
+          $livestreaming_error = "This field is required";
+      } else {
+
+                      //Insert to database
+                                      $sql = "INSERT INTO livestreaming_facebook (url) VALUES (?)";
+          
+                                      if ($stmt = mysqli_prepare($db, $sql)) {
+                   
+                     //bind values to the prepared statement
+                                          mysqli_stmt_bind_param($stmt, "s", $livestreaming);
+                                          if (mysqli_stmt_execute($stmt)) {
+                                              $success = " Facebook URL Added Successfully";
+                                          }
+                                      }
+                                  }
+                              }
+                   
+                            // display live facebook 
+                              function display_livestreaming_facebook(){
+                                global $db, $facebook_rows, $row, $status;
+                                $status = "true";
+                                     $sql = "SELECT  * FROM livestreaming_facebook WHERE status =? ORDER BY id DESC";
+                                    if ($stmt = mysqli_prepare($db, $sql)) {
+                                        // Bind variables to the prepared statement as parameters
+                                        mysqli_stmt_bind_param($stmt, "s", $status);
+                                        // Attempt to execute the prepared statement
+                                        if (mysqli_stmt_execute($stmt)) {
+                                            // Store result
+                                            $result =  mysqli_stmt_get_result($stmt);
+                                            // Check if data exists, if yes display data
+                                            if (mysqli_num_rows($result)) {
+                                                $facebook_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                                    
+                                            }
+                                        }
+                                    }
+                              }
+                            
+
+                              function delete_livestreaming_facebook($request){
+                                global $db, $id;
+                               if(isset($_GET['id'])){
+                                   $id = $_GET['id'];
+                            
+                                   $sql = "DELETE  FROM livestreaming_facebook WHERE id =?";
+                                   if($stmt = mysqli_prepare($db, $sql)){
+                                        mysqli_stmt_bind_param($stmt, "i", $id);
+                                        if(mysqli_stmt_execute($stmt)){
+                                            header("location:livestreaming.php");
+                                        }
+                                   }
+                               }
+                            
+                            }
+                
+
+
+
+
+
 
 
 

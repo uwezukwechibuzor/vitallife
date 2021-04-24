@@ -1,29 +1,23 @@
-<?php
-    
-	require_once "function.php";
+<?php 
+ require_once "function.php";
 
-  global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $speaker, $category, $file_err, $topic_error,  $category_error, $speaker_error, $file1, $fileName1, $fileTmpName1, $fileSize1, $fileError1, $fileType1, $fileExt1, $fileActualExt1, $allowed1, $error1, $image1,  $fileNameNew1, $fileDestination1, $url, $url_error;
+ global $db, $livestreaming, $livestreaming_error, $success, $facebook_rows, $id;
+   
+ if(isset($_POST['url'])){
+     if(livestreaming_facebook($_POST)){
 
-  global $db, $livestreaming_rows,  $status, $id;
+     }
+ }
+ if(isset($_POST['delete'])){
+     if(delete_livestreaming_facebook($_POST)){
 
+     }
+ }
 
+display_livestreaming_facebook();
 
-    if(isset($_POST['url_links'])){
-       if(liveStreaming($_POST)){
-        
-       }
-   }
-    if(isset($_POST['delete_livestreaming'])){
-       if(delete_livestreaming($_POST)){
-        
-       }
-   }
-
-    display_liveStreaming();
-    
 
 ?>
-
 
 <?php 
       include "header.php";
@@ -52,22 +46,15 @@
             <span class="text-primary"><?= $success  ?></span>
             <span class="text-primary"><?  ?></span>
             <form action="livestreaming.php" method="POST" role="form" class="contactForm" enctype="multipart/form-data">
+          
               <div class="form-group">
-                <input type="text" name="topic" class="form-control" placeholder="Topic"/>
-              </div>
-               <span class="text-danger"><?= $topic_error ?></span>
-              <div class="form-group">
-                <input type="text" class="form-control" name="speaker" placeholder="Speaker" />
+                <input type="text" class="form-control" name="livestreaming" placeholder="Enter LiveStreaming URL" />
                 <div class="validation"></div>
-               <span class="text-danger"><?= $speaker_error ?></span> 
+              <span class="text-danger"><?= $livestreaming_error ?></span>
               </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="url" placeholder="URL" />
-                <div class="validation"></div>
-              <span class="text-danger"><?= $url_error ?></span>
-              </div>
-
-              <div class="text-center"><button type="submit" name="url_links" class="btn btn-primary btn-lg">Add URL</button></div>
+                <?php if(!is_array($facebook_rows)) { ?>
+              <div class="text-center"><button type="submit" name="url" class="btn btn-primary btn-lg">Go Live</button></div>
+              <?php } ?>
             </form>
           </div>
 
@@ -99,24 +86,23 @@
                   <tr>
                  <th scope="col">SN</th>
                  <th>Url</th>
-                 <th>Topic</th>
-                   <th>Speaker</th>
                    <th>Delete</th>
                </tr>
                   </thead>
                   <tbody>
-            <?php foreach($livestreaming_rows as $row){ ?>       
+         <?php if(is_array($facebook_rows)){ ?>
+        <?php foreach($facebook_rows as $row){ ?>
     <tr>
       <th scope="row"><?= $row['id'] ?></th>
       <td style="color: red;" ><?= $row['url'] ?></td>
-      <td style="color: red;" ><?= $row['topic'] ?></td>
-      <td style="color: red;" ><?= $row['speaker'] ?></td>
        <td>
           <form action="livestreaming.php?id=<?= $row['id'] ?>" method="POST">
-              <button class="btn-danger" name="delete_livestreaming">Delete</button>
+              <button class="btn-danger" name="delete">End LiveStreaming Notification</button>
           </form>
       </td>
     </tr>
+  <?php } ?>
+  <?php }else{ ?>
   <?php } ?>
   </tbody>
                 </table>

@@ -47,6 +47,7 @@ require_once "header.php";
 </div>
 </div>
 <div class="col-12">
+<?php if(is_array($events_rows)){ ?>
 <?php foreach($events_rows as $row){ ?>
 <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
 
@@ -72,6 +73,8 @@ require_once "header.php";
 
 </div>
 <?php } ?>
+<?php }else{ ?>
+    <?php } ?>
 </div>
 
 <div class="col-12">

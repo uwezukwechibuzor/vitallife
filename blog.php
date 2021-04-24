@@ -1,3 +1,18 @@
+
+<?php
+    
+    require_once "admin/function.php";
+  
+      global $db, $blog_rows,  $status, $id, $blog_row, $blog_rows_col;
+
+  display_blogs();
+  display_blogs_col();
+  
+     
+  
+  ?>
+
+
 <?php
  require_once "header.php";
  ?>
@@ -25,122 +40,39 @@
 
 <div class="col-12 col-lg-8">
 <div class="row">
-
+<?php if(is_array($blog_rows)){ ?>
+ <?php foreach($blog_rows as $row){?>
 <div class="col-12 col-md-6">
 <div class="single-blog-post mb-50">
 <div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/10.jpg" alt=""></a>
+<a href="single-post.php?id=<?= $row['id'] ?>"><img src="admin/<?= $row['pic'] ?>" alt="" style=" width: 100%; height: 200px; object-fit:cover"></a>
 </div>
 <div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>Mexican priest murdered in his church</h4>
+<a href="single-post.php?id=<?= $row['id'] ?>" class="post-title">
+<h4><?= $row['title'] ?></h4>
 </a>
 <div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Luke Coppen</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 23, 2018</a>
+<a href="#"><i class="fa fa-user" aria-hidden="true"></i><?= $row['author'] ?></a>
+<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><?= $row['created_at'] ?></a>
 </div>
-<p class="post-excerpt">The priest, who was also the diocesan judicial vicar, was accosted by the assailant and was involved in a discussion.</p>
+<p class="post-excerpt"><?= substr($row['body'], 0, 150).'.......' ?></p>
+ <a href="single-post.php?id=<?= $row['id'] ?>">Read More</a>
 </div>
 </div>
 </div>
+<?php } ?>
+<?php }else{ ?>
+    <?php } ?>
 
-<div class="col-12 col-md-6">
-<div class="single-blog-post mb-50">
-<div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/11.jpg" alt=""></a>
-</div>
-<div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>A daily guide to what's open in the Catholic Church</h4>
-</a>
-<div class="post-meta d-flex">
- <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Staff Reporter</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 03, 2018</a>
-</div>
-<p class="post-excerpt">The Liturgy helps us to “rediscover our identity as disciples of the Risen Lord”, Pope Francis said at the Regina Caeli.</p>
-</div>
-</div>
-</div>
 
-<div class="col-12 col-md-6">
-<div class="single-blog-post mb-50">
-<div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/12.jpg" alt=""></a>
-</div>
-<div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>The Bishop of Dromore was right to resign.</h4>
-</a>
-<div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Lucie Smith</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 15, 2018</a>
-</div>
-<p class="post-excerpt">God comes to us in free and undeserved favor in the person of Jesus Christ who lived, died, and rose for us that we might belong to God.</p>
-</div>
-</div>
-</div>
-
-<div class="col-12 col-md-6">
-<div class="single-blog-post mb-50">
-<div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/10.jpg" alt=""></a>
-</div>
-<div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>Seeing and Savoring Jesus Christ</h4>
-</a>
-<div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Maxim Mikey</a>
- <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 15, 2018</a>
-</div>
-<p class="post-excerpt">God comes to us in free and undeserved favor in the person of Jesus Christ who lived, died, and rose for us that we might belong to God.</p>
-</div>
-</div>
-</div>
-
-<div class="col-12 col-md-6">
-<div class="single-blog-post mb-50">
-<div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/11.jpg" alt=""></a>
-</div>
-<div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>A God-Entranced Vision of All Things</h4>
-</a>
-<div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Michen Sovic</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 15, 2018</a>
-</div>
-<p class="post-excerpt">God comes to us in free and undeserved favor in the person of Jesus Christ who lived, died, and rose for us that we might belong to God.</p>
-</div>
-</div>
-</div>
-
-<div class="col-12 col-md-6">
-<div class="single-blog-post mb-50">
-<div class="post-thumbnail">
-<a href="single-post.html"><img src="img/bg-img/12.jpg" alt=""></a>
-</div>
-<div class="post-content">
-<a href="single-post.html" class="post-title">
-<h4>Seeing and Savoring Jesus Christ</h4>
-</a>
-<div class="post-meta d-flex">
-<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Rease Milley</a>
-<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 15, 2018</a>
- </div>
-<p class="post-excerpt">God comes to us in free and undeserved favor in the person of Jesus Christ who lived, died, and rose for us that we might belong to God.</p>
-</div>
-</div>
-</div>
 </div>
 <div class="pagination-area">
 <nav aria-label="Page navigation example">
 <ul class="pagination">
-<li class="page-item active"><a class="page-link" href="#">1</a></li>
+<!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
 <li class="page-item"><a class="page-link" href="#">2</a></li>
 <li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+<li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li> -->
 </ul>
 </nav>
 </div>
@@ -161,16 +93,9 @@
 <div class="single-widget-area">
 
 <div class="widget-title">
-<h6>Categories</h6>
+
 </div>
-<ol class="crose-catagories">
-<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Religion</a></li>
-<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Hope</a></li>
-<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Donate</a></li>
-<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Church</a></li>
-<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Event</a></li>
-<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Children</a></li>
-</ol>
+
 </div>
 
 <div class="single-widget-area">
@@ -178,45 +103,25 @@
 <div class="widget-title">
 <h6>Recent News</h6>
 </div>
-
+<?php if(is_array($blog_rows)){ ?>
+<?php foreach($blog_rows_col as $row){?>
 <div class="single-latest-post">
-<a href="#" class="post-title">
-<h6>Weekly meeting in companies Think Room</h6>
+<a href="single-post.php?id=<?= $row['id'] ?>" class="post-title">
+<h6><?= $row['title'] ?></h6>
 </a>
-<p class="post-date">November 11, 2017</p>
+<p class="post-date"><?= $row['created_at'] ?></p>
 </div>
-
-<div class="single-latest-post">
-<a href="#" class="post-title">
-<h6>Six important methods to keep servers safe</h6>
-</a>
-<p class="post-date">November 11, 2017</p>
-</div>
-
-<div class="single-latest-post">
-<a href="#" class="post-title">
-<h6>New management method which rocks</h6>
-</a>
-<p class="post-date">November 11, 2017</p>
-</div>
-
-<div class="single-latest-post">
-<a href="#" class="post-title">
-<h6>Seven ways to get ready for a business contract</h6>
-</a>
-<p class="post-date">November 11, 2017</p>
-</div>
+<?php } ?>
+<?php }else{ ?>
+    <?php } ?>
 </div>
 
 <div class="single-widget-area">
 
 <div class="widget-title">
-<h6>Archives</h6>
+
 </div>
-<ol class="crose-archives">
-<li><a href="#">July 2015</a></li>
-<li><a href="#">March 2015</a></li>
-</ol>
+
 </div>
 
 <div class="single-widget-area">
@@ -226,11 +131,9 @@
  </div>
 
 <ol class="popular-tags d-flex flex-wrap">
-<li><a href="#">Sermons</a></li>
-<li><a href="#">Cross</a></li>
-<li><a href="#">Pray</a></li>
-<li><a href="#">Holly Cross</a></li>
-<li><a href="#">Event</a></li>
+<li><a href="sermons.php">Sermons</a></li>
+<li><a href="videos.php">Videos</a></li>
+<li><a href="livestreaming.php">LiveStreaming</a></li>
 </ol>
 </div>
 </div>
@@ -239,7 +142,7 @@
 </div>
 </div>
 
-
+<!-- 
 <section class="subscribe-area">
 <div class="container">
 <div class="row align-items-center">
@@ -261,7 +164,7 @@
 </div>
 </div>
 </div>
-</section>
+</section> -->
 
 <?php 
 require_once "footer.php";

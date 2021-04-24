@@ -37,7 +37,7 @@ require_once "header.php";
 
 
 <div class="map-area mt-30">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22236.40558254599!2d-118.25292394686001!3d34.057682914027104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2z4Kay4Ka4IOCmj-CmnuCnjeCmnOCnh-CmsuCnh-CmuCwg4KaV4KeN4Kav4Ka-4Kay4Ka_4Kar4KeL4Kaw4KeN4Kao4Ka_4Kav4Ka84Ka-LCDgpq7gpr7gprDgp43gppXgpr_gpqgg4Kav4KeB4KaV4KeN4Kak4Kaw4Ka-4Ka34KeN4Kaf4KeN4Kaw!5e0!3m2!1sbn!2sbd!4v1532328708137" allowfullscreen></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31721.19663919481!2d5.621739739550781!3d6.3746828000000075!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1040d3a5db6bb105%3A0x7deaf3f57168a8f2!2sVITAL%20LIFE%20FOUNDATION!5e0!3m2!1sen!2sus!4v1618912201053!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </div>
 
 
@@ -50,7 +50,7 @@ require_once "header.php";
 <div class="col-12 col-md-4">
 <div class="contact-content contact-information">
 <h4>Contact</h4>
-<p><a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="acc5c2cac382c8c9c9decfdec9cdd8c5dac9eccbc1cdc5c082cfc3c1">Vitalifefoundation&@yahoo.com</a></p>
+<p><a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="acc5c2cac382c8c9c9decfdec9cdd8c5dac9eccbc1cdc5c082cfc3c1">Vitalifefoundation @yahoo.com</a></p>
 <p>+2349040236583</p>
 </div>
 </div>

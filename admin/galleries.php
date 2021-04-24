@@ -56,12 +56,18 @@
           <div class="col-lg-9">
             <div class="recent">
               <h3>Home Page Settings</h3>
+              <h5>Upload Images Here, multiple Images can Be added at once</h5>
+              <p class="text-danger">Image format 'jpg', 'jpeg', 'png'</p>
             </div>
             <span class="text-primary"><?php echo $success ?></span>
             <span class="text-danger"><?php echo $error ?></span>
             <form action="galleries.php" method="post" role="form" class="contactForm" enctype="multipart/form-data">
               <div class="form-group">
                 <input type="file" name="file[]" multiple>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="links" placeholder="Enter Image Description" />
+                <div class="validation"></div>
               </div>
               <div class="text-center"><button type="submit" name="gallery" class="btn btn-primary btn-lg">Add</button></div>
             </form>

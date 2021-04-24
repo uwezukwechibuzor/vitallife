@@ -93,6 +93,7 @@ Your browser does not support the video tag.
 </div>
 </div>
 <div class="row">
+<?php if(is_array($videos_rows)){ ?>
 <?php foreach($videos_rows as $row){ ?>
 
 <div class="col-12 col-sm-6 col-lg-4">
@@ -127,7 +128,8 @@ Your browser does not support the video tag.
 </div>
 </div>
   <?php } ?>
-
+  <?php }else{ ?>
+    <?php } ?>
 </div>
 </div>
 </section>

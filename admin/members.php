@@ -63,10 +63,10 @@ display_member();
     <?php foreach($rows as $row){ ?>
     <tr>
       <th scope="row"><?= $row['id'] ?></th>
-      <td><?= $row['full_name'] ?></td>
-      <td><?= $row['email'] ?></td>
-      <td><?= $row['phone_no'] ?></td>
-      <td><?= $row['created_at'] ?></td>
+      <td style="color: red;" ><?= $row['full_name'] ?></td>
+      <td style="color: red;" ><?= $row['email'] ?></td>
+      <td style="color: red;" ><?= $row['phone_no'] ?></td>
+      <td style="color: red;" ><?= $row['created_at'] ?></td>
     </tr>
     <?php } ?>
   </tbody>

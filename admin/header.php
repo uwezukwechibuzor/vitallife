@@ -67,6 +67,13 @@ ob_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+  <script src="https://cdn.tiny.cloud/1/rjz4rocolby78w83ha1pgjx5dyietldhjkc553dsspsrjeub/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+
 </head>
 
 <body>
@@ -80,7 +87,7 @@ ob_start();
       </div>
 
       <!--logo start-->
-      <a href="index.php" class="logo"><span><img src="img/vitallife_logo.jpeg" height="50px" width="110px" alt=""></span></a>
+      <a href="index.php" class="logo"><span><img src="img/vitallife_logo.jpeg" height="50" width="110px" alt=""></span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">

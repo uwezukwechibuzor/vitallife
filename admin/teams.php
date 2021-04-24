@@ -66,6 +66,14 @@
                 <div class="validation"></div>
               </div>
               <div class="form-group">
+                <input type="text" class="form-control" name="facebook" placeholder="Enter Your facebook URL" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="twitter" placeholder="Enter Your Twitter URL" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
                 <input type="file" name="file">
               </div>
               <div class="text-center"><button type="submit" name="add" class="btn btn-primary btn-lg">Add</button></div>

@@ -35,13 +35,15 @@
                       </a>
             <ul class="sub">
               <li><a class="" href="downloads.php">Downloads Page</a></li>
+              <li><a class="" href="youtubevideos.php">YouTube Videos</a></li>
               <li><a class="" href="livestreaming.php">LiveStreaming Page</a></li>
               <li><a class="" href="events.php">Events Page</a></li>
               <li><a class="" href="blog.php">Blog Page</a></li>
               <li><a class="" href="galleries.php">Galleries</a></li>
               <li><a class="" href="members.php">Members</a></li>
-              <li><a class="" href="teams.php">Meet Our Team</a></li>
+              <li><a class="" href="teams.php">Meet our executives</a></li>
               <li><a class="" href="bible_verse.php">Bible Reading Strategy</a></li>
+              <li><a class="" href="comments.php">Comments</a></li>
             </ul>
           </li>
 

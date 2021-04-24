@@ -92,6 +92,7 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
 </div>
 </div>
 <div class="row">
+<?php if(is_array($livestreaming_rows)){ ?>
 <?php foreach($livestreaming_rows as $row){ ?>
 
 <div class="col-12 col-sm-6 col-lg-4">
@@ -130,7 +131,8 @@ src="<?= $row['url'] ?>">
 </div>
 </div>
   <?php } ?>
-
+  <?php }else{ ?>
+    <?php } ?>
 </div>
 </div>
 </section>

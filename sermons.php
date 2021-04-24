@@ -34,10 +34,54 @@ require_once "header.php";
 </div>
 
 
+
 <div class="sermons-content-area section-padding-100-0">
 <div class="container">
 <div class="row">
-<div class="col-12">
+<!-- <div class="col-12">
+<div class="sermons-content-thumbnail">
+</div>
+<video width="100%" height="auto" controls disablePictureInPicture controlsList="nodownload">
+  <source src"" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+<div class="sermons-text text-center">
+<h2>Recent Video</h2>
+<h2>Start a New Way of Living</h2>
+<div class="sermons-meta-data d-flex flex-wrap justify-content-center">
+<p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
+<p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
+<p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
+</div>
+<div class="sermons-cata">
+ <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
+<a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
+<a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
+<a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+</div>
+
+<div class="read-more-share d-flex flex-wrap justify-content-between">
+<div class="read-more-btn">
+
+</div> -->
+
+<!-- <div class="share">
+<span>Share:</span>
+<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+<a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+</div> -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 
 
 
@@ -53,14 +97,15 @@ require_once "header.php";
 </div>
 </div>
 <div class="row">
+<?php if(is_array($downloads_rows)){ ?>
 <?php foreach($downloads_rows as $row){ ?>
 <div class="col-12 col-sm-6 col-lg-4">
 <div class="single-latest-sermons mb-100">
 <div class="sermons-thumbnail">
 <img  src="admin/<?= $row['pic'] ?>" alt="" style=" width: 100%; height: 200px; object-fit:cover">
 
-<!-- <div class="sermons-date">
-<h6><span></h6> 
+ <!-- <div class="sermons-date">
+
 </div> -->
 </div>
 <div class="sermons-content">
@@ -79,11 +124,11 @@ require_once "header.php";
 </div>
 </div>
 <?php } ?>
-
+<?php }else{ ?>
+    <?php } ?>
 </div>
 </div>
 </section>
-
 <!-- 
 <section class="subscribe-area">
 <div class="container">

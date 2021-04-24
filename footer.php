@@ -1,3 +1,21 @@
+<?php
+ require_once "admin/function.php";
+
+global $db, $blog_rows;
+
+
+display_blogs_index();
+
+
+?>
+
+
+
+
+
+
+
+
 <footer class="footer-area">
 
 <div class="main-footer-area">
@@ -6,8 +24,8 @@
 
 <div class="col-12 col-sm-6 col-lg-3">
 <div class="single-footer-widget mb-70">
-<a href="index.php" class="footer-logo"><img src="img/core-img/vitallife_logo.jpeg" height="" width="100px" alt=""></a>
-<p>Building and Reviving Talents and Gifts for the Gospel of Jesus</p>
+<a href="index.php" class="footer-logo"><p>Vital Life Foundation </p>
+<p>Building and Reviving Talents and Gifts for the Gospel of Jesus</p></a>
 </div>
 </div>
 
@@ -22,7 +40,7 @@
 <li><a href="sermons.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sermons</a></li>
 <li><a href="contact.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Contact</a></li>
 <li><a href="blog.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Blogs</a></li>
-<li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Donate</a></li>
+<li><a href="payform.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Donate</a></li>
 </ul>
 </nav>
 </div>
@@ -31,16 +49,15 @@
 <div class="col-12 col-sm-6 col-lg-3">
 <div class="single-footer-widget mb-70">
 <h5 class="widget-title">News Latest</h5>
-
+<?php if(is_array($blog_rows)){ ?>
+<?php foreach($blog_rows as $row){ ?>
 <div class="single-latest-news">
-<a href="#">Polish schools in UK warned</a>
-<p><i class="fa fa-calendar" aria-hidden="true"></i> November 11, 2017</p>
+<a href="single-post.php?id=<?= $row['id'] ?>"><?= $row['title'] ?></a>
+<p><i class="fa fa-calendar" aria-hidden="true"></i><?= $row['created_at'] ?></p>
 </div>
-
-<div class="single-latest-news">
-<a href="#">University league tables 2018</a>
-<p><i class="fa fa-calendar" aria-hidden="true"></i> November 11, 2017</p>
-</div>
+<?php } ?>
+<?php }else{ ?>
+    <?php } ?>
 </div>
 </div>
 

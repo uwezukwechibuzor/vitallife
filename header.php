@@ -1,3 +1,14 @@
+<?php 
+ require_once "admin/function.php";
+
+ global $db, $livestreaming, $livestreaming_error, $success, $facebook_rows, $id;
+   
+display_livestreaming_facebook();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,14 +86,51 @@
 <li><a href="about.php">About</a></li>
 <li><a href="#">Downloads</a>
 <ul class="dropdown">
+<li><a href="#">Music</a>
+<ul class="dropdown">
 <li><a href="sermons.php">Audios</a></li>
 <li><a href="video.php">Videos</a></li>
-<li><a href="livestreaming.php">Live Streaming</a></li>
+<li><a href="livestreaming.php">YouTube Videos</a></li>
+</ul>
+</li>
+
+<li><a href="#">General Messages</a>
+<ul class="dropdown">
+<li><a href="sermons.php">Audios</a></li>
+<li><a href="video.php">Videos</a></li>
+</ul>
+</li>
+
+<li><a href="#">VLF Messages</a>
+<ul class="dropdown">
+<li><a href="sermons.php">Audios</a></li>
+<li><a href="video.php">Videos</a></li>
+<li><a href="livestreaming.php">YouTube Videos</a></li>
+</ul>
+</li>
+
+<li><a href="livestreaming.php">TalkShow</a></li>
+
+<li><a href="#">Movies</a>
+<ul class="dropdown">
+<li><a href="sermons.php">Videos</a></li>
+<li><a href="video.php">YouTube Videos</a></li>
+</ul>
+</li>
+
+<li><a href="#">Uploads</a>
+<ul class="dropdown">
+<li><a href="sermons.php">Blogs</a></li>
+<li><a href="video.php">Audios</a></li>
+<li><a href="video.php">Videos</a></li>
+</ul>
+</li>
 </ul>
 </li>
 
 <li><a href="events.php">Events</a></li>
 <li><a href="blog.php">Blog</a></li>
+<li><a href="blog.php">Upload</a></li>
 <li><a href="contact.php">Contact</a></li>
 </ul>
 
@@ -113,4 +161,7 @@
 </div>
 </div>
 
+<?php if(is_array($facebook_rows)){ ?>
+<marquee behavior="scroll" direction="right"><h1><img src="img/live2.jpg" width="60px" height="60px" alt=""> <a class="text-primary" href="streaming.php">LIVE STREAMING, WATCH HERE</a></h1></marquee>
+<?php } ?>
 </header>
