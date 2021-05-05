@@ -70,7 +70,7 @@
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="twitter" placeholder="Enter Your Twitter URL" />
+                <input type="text" class="form-control" name="twitter" placeholder="Department" />
                 <div class="validation"></div>
               </div>
               <div class="form-group">
@@ -109,16 +109,19 @@
                  <th scope="col">SN</th>
                  <th>Full name</th>
                    <th>Position</th>
+                   <th>Department</th>
                    <th scope="col">Image</th>
                    <th>Delete</th>
                </tr>
                   </thead>
                   <tbody>
+        <?php if(is_array($rows)){ ?>          
       <?php foreach($rows as $row){ ?>
     <tr>
       <th scope="row"><?php echo $row['id'] ?></th>
       <td style="color: red;" ><?php echo $row['full_name'] ?></td>
       <td style="color: red;" ><?php echo $row['position'] ?></td>
+      <td style="color: red;" ><?php echo $row['department'] ?></td>
       <td><img src="<?php echo $row['pic'] ?>" alt="" height="50px" width="80px"></td>
       <td>
           <form action="teams.php?id=<?= $row['id'] ?>" method="POST">
@@ -126,6 +129,8 @@
           </form>
       </td>
     </tr>
+    <?php } ?>
+    <?php }else{ ?>
     <?php } ?>
   </tbody>
                 </table>

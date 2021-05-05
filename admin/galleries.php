@@ -106,6 +106,7 @@
                </tr>
                   </thead>
                   <tbody>
+                  <?php if(is_array($gallery_rows)){ ?>
                   <?php foreach($gallery_rows as $gallery_row){ ?>
     <tr>
       <th scope="row"><?= $gallery_row['id'] ?></th>
@@ -116,6 +117,8 @@
           </form>
       </td>
     </tr>
+    <?php } ?>
+    <?php }else{ ?>
     <?php } ?>
   </tbody>
                 </table>

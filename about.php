@@ -77,7 +77,7 @@ Every 1st and 3rd Friday of the month</p>
 <div class="row">
 <div class="col-12">
 <div class="call-to-action-content text-center">
-<h2 class="text-primary">What We Do</h2>
+<h2 class="text-primary">Our Vision</h2>
 <h4 class="text-light">Preaching The Gospel Of Jesus Christ With Our Gifts And Talents <br> We are One Family in Christ</h4>
 <a href="member.php" class="btn crose-btn btn-2">Become A Member</a>
 </div>
@@ -147,12 +147,14 @@ Every 1st and 3rd Friday of the month</p>
 <div class="col-12 col-sm-6 col-lg-3">
 <div class="single-team-members text-center mb-100">
 <div class="team-thumb" style="background-image: url(admin/<?=$row['pic'] ?>);">
+<img class="team-thumb" src="admin/<?= $row['pic'] ?>" alt=""> 
 <div class="team-social-info">
 <a href="<?= $row['facebook'] ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-<a href="<?= $row['twitter'] ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a>
 </div>
 </div>
 <h6><?= $row['full_name'] ?></h6>
+<span><?= $row['department'] ?></span>
+<br>
 <span><?= $row['position'] ?></span>
 </div>
 </div>

@@ -15,13 +15,13 @@
           </li>
         
           <li class="active">
-            <a class="" href="profile.php">
+            <a class="" href="profile">
                           <i class="fa fa-user-md"></i>
                           <span>Profile</span>
                       </a>
           </li>
           <li class="active">
-            <a class="" href="../index.php">
+            <a class="" href="../index">
             <i class="icon_documents_alt"></i>
                           <span>Landing Page</span>
                       </a>
@@ -34,16 +34,16 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="downloads.php">Downloads Page</a></li>
-              <li><a class="" href="youtubevideos.php">YouTube Videos</a></li>
-              <li><a class="" href="livestreaming.php">LiveStreaming Page</a></li>
-              <li><a class="" href="events.php">Events Page</a></li>
-              <li><a class="" href="blog.php">Blog Page</a></li>
-              <li><a class="" href="galleries.php">Galleries</a></li>
-              <li><a class="" href="members.php">Members</a></li>
-              <li><a class="" href="teams.php">Meet our executives</a></li>
-              <li><a class="" href="bible_verse.php">Bible Reading Strategy</a></li>
-              <li><a class="" href="comments.php">Comments</a></li>
+              <li><a class="" href="downloads">Downloads Page</a></li>
+              <li><a class="" href="youtubevideos">YouTube Videos</a></li>
+              <li><a class="" href="livestreaming">LiveStreaming Page</a></li>
+              <li><a class="" href="events">Events Page</a></li>
+              <li><a class="" href="blog">Blog Page</a></li>
+              <li><a class="" href="galleries">Galleries</a></li>
+              <li><a class="" href="members">Members</a></li>
+              <li><a class="" href="teams">Meet our executives</a></li>
+              <li><a class="" href="bible_verse">Bible Reading Strategy</a></li>
+              <li><a class="" href="comments">Comments</a></li>
             </ul>
           </li>
 

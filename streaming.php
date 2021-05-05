@@ -170,8 +170,11 @@ display_livestreaming_facebook();
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
 <li class="breadcrumb-item"><a href="livestreaming.php">LiveStreaming</a></li>
+<?php if(is_array($facebook_rows)){ ?>
 <?php foreach($facebook_rows as $row){ ?>
 <iframe src="<?= $row['url'] ?>" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+<?php } ?>
+<?php }else{ ?>
 <?php } ?>
 </ol>
 </nav>

@@ -25,7 +25,7 @@ require_once "header.php";
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">Videos</li>
+<li class="breadcrumb-item active" aria-current="page">Music Videos</li>
 </ol>
 </nav>
 </div>
@@ -87,7 +87,7 @@ Your browser does not support the video tag.
 
 <div class="col-12">
 <div class="section-heading">
-<h2>Videos</h2>
+<h2>Music Videos</h2>
 <!-- <p>Loaded with fast-paced worship, activities, and video teachings to address real issues that students face each day</p> -->
 </div>
 </div>
@@ -101,9 +101,19 @@ Your browser does not support the video tag.
 <div class="single-latest-sermons mb-100">
 <div class="sermons-thumbnail">
 
-<video width="100%" height="auto" controls disablePictureInPicture controlsList="nodownload">
+<!-- <video width="100%" height="auto" controls disablePictureInPicture controlsList="nodownload">
   <source src="admin/<?= $row['video'] ?>" type="video/mp4">
 Your browser does not support the video tag.
+</video> -->
+
+<video
+  class="lazy"
+  controls
+  width="100%"
+  data-src="admin/<?= $row['video'] ?>"
+  data-poster="admin/<?= $row['pic'] ?>">
+  <source type="video/mp4"
+      data-src="admin/<?= $row['video'] ?>" />
 </video>
 
 

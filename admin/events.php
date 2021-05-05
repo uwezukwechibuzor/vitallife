@@ -2,7 +2,7 @@
     
 	require_once "function.php";
 
-	global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $address, $details, $pic, $file_err,  $topic_error, $time_error, $address_error, $details_error, $rows, $status, $events_rows, $date, $date_error;
+	global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $address, $details, $pic, $file_err,  $topic_error, $time_error, $address_error, $details_error, $rows, $status, $events_rows, $date, $date_error, $links_error, $links;
 
 
    
@@ -76,6 +76,11 @@ display_events();
                 <div class="validation"></div>
               </div>
               <span class="text-danger"><?php echo $details_error ?></span>
+              <div class="form-group">
+                <input type="text" class="form-control" name="links" placeholder="URL" />
+                <div class="validation"></div>
+              </div>
+              <span class="text-danger"><?php echo $links_error ?></span>
 
               <div class="form-group">
                 <input type="file" name="file">
@@ -118,6 +123,7 @@ display_events();
                    <th>Date</th>
                    <th>Address</th>
                    <th>Details</th>
+                   <th>URL</th>
                    <th scope="col">Image</th>
                    <th>Delete</th>
                </tr>
@@ -131,6 +137,7 @@ display_events();
       <td style="color: red;" ><?= $row['date'] ?></td>
       <td style="color: red;" ><?= $row['address'] ?></td>
       <td style="color: red;" ><?= $row['details'] ?></td>
+      <td style="color: red;" ><?= $row['links'] ?></td>
       <td><img src="<?= $row['pic'] ?>" alt="" height="50px" width="80px"></td>
       <td>
           <form action="events.php?id=<?= $row['id'] ?>" method="POST">

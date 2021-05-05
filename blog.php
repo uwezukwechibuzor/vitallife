@@ -4,10 +4,17 @@
     require_once "admin/function.php";
   
       global $db, $blog_rows,  $status, $id, $blog_row, $blog_rows_col;
+      global  $search_rows, $row, $search;
+
 
   display_blogs();
   display_blogs_col();
   
+  if(isset($_POST['search_blog'])){
+    if(blog_search($_POST)){
+
+    }
+  }
      
   
   ?>
@@ -83,9 +90,9 @@
 
 <div class="single-widget-area">
 <div class="search-form">
-<form action="#" method="get">
+<form action="blog" method="post">
 <input type="search" name="search" placeholder="Search Here">
-<button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+<button name="search_blog" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
 </div>
 </div>
@@ -93,7 +100,16 @@
 <div class="single-widget-area">
 
 <div class="widget-title">
-
+<?php if(isset($_POST['search_blog'])){ ?>
+<?php if(is_array($search_rows)) { ?>
+<p>Searched Results</p>
+<?php foreach($search_rows as $row){ ?>
+<a href="single-post.php?id=<?=$row['id'] ?>"><?= $row['title'] ?></a> <hr>
+<?php } ?>
+<?php }else{ ?>
+  <h6>No Result Found</h6>
+<?php } ?>
+<?php } ?>
 </div>
 
 </div>

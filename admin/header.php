@@ -87,7 +87,7 @@ ob_start();
       </div>
 
       <!--logo start-->
-      <a href="index.php" class="logo"><span><img src="img/vitallife_logo.jpeg" height="50" width="110px" alt=""></span></a>
+      <a href="index" class="logo"><span><img src="img/vitallife_logo.jpeg" height="50" width="110px" alt=""></span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -129,4 +129,4 @@ ob_start();
 
 <?php }else{ ?>
 
-    <?php header("location:login.php"); } ?>
+    <?php header("location:login"); } ?>

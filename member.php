@@ -2,7 +2,7 @@
 <?php 
  require_once "admin/function.php";
 
-global $db, $email_error, $email, $phone_err, $fullname, $fullname_err, $success,  $phone, $err;
+global $db, $email_error, $email, $phone_err, $fullname, $fullname_err, $success,  $phone, $err, $country, $country_err, $city, $state_err, $state;
 
 if(isset($_POST['submit'])){
     if(member($_POST)){
@@ -69,17 +69,46 @@ require_once "header.php";
 <label for="contact-email">Email:</label>
 <input name="email" type="email" class="form-control" id="contact-email" placeholder="Email">
 <span style="background-color: white; color:red"><?php echo $email_error ?></span>
+</div>
+</div>
+<div class="col-12 col-lg-4">
+<div class="form-group">
+<label for="contact-email">Country:</label>
+<input name="country" type="text" class="form-control" id="contact-email" placeholder="Country">
+<span style="background-color: white; color:red"><?= $country_err  ?></span>
+</div>
+</div>
+<div class="col-12 col-lg-4">
+<div class="form-group">
+<label for="contact-email">State:</label>
+<input name="state" type="text" class="form-control" id="contact-email" placeholder="State">
+<span style="background-color: white; color:red"><?= $state_err ?></span>
+</div>
+</div>
+<div class="col-12 col-lg-4">
+<div class="form-group">
+<label for="contact-email">City:</label>
+<input name="city" type="text" class="form-control" id="contact-email" placeholder="City">
+<span style="background-color: white; color:red"><?= $city ?></span>
+</div>
+</div>
 
-</div>
-</div>
 <div class="col-12 col-lg-4">
 <div class="form-group">
 <label for="contact-number">Phone No:</label>
 <input name="phone_no" type="text" class="form-control" id="contact-number" placeholder="Phone number">
 <span style="background-color: white; color:red"><?php echo $phone_err ?></span>
+</div>
+</div>
 
+<div class="col-12 col-lg-4">
+<div class="form-group">
+<label for="contact-email">List Your Talents:</label>
+<input name="talents" type="text" class="form-control" id="contact-email" placeholder="List Your Talents">
+<span style="background-color: white; color:red"><? ?></span>
 </div>
 </div>
+
 <div class="col-12">
 <!-- <div class="form-group">
 <label for="message">Message*:</label>

@@ -4,7 +4,7 @@
 
   global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $speaker, $category, $file_err, $topic_error,  $category_error, $speaker_error, $file1, $fileName1, $fileTmpName1, $fileSize1, $fileError1, $fileType1, $fileExt1, $fileActualExt1, $allowed1, $error1, $image1,  $fileNameNew1, $fileDestination1, $url, $url_error;
 
-  global $db, $livestreaming_rows,  $status, $id;
+  global $db, $livestreaming_rows,  $status, $id, $vlf_livestreaming_rows,$talkshow_livestreaming_rows, $movies_livestreaming_rows;
 
 
 
@@ -20,6 +20,9 @@
    }
 
     display_liveStreaming();
+    display_youtube_vlf();
+    display_youtube_talkshow();
+    display_youtube_movies();
     
 
 ?>
@@ -56,15 +59,23 @@
                 <input type="text" name="topic" class="form-control" placeholder="Topic"/>
               </div>
                <span class="text-danger"><?= $topic_error ?></span>
-              <div class="form-group">
-                <input type="text" class="form-control" name="speaker" placeholder="Speaker" />
-                <div class="validation"></div>
-               <span class="text-danger"><?= $speaker_error ?></span> 
-              </div>
+           
               <div class="form-group">
                 <input type="text" class="form-control" name="url" placeholder="URL" />
                 <div class="validation"></div>
               <span class="text-danger"><?= $url_error ?></span>
+              </div>
+
+              <label for="">Category</label>
+              <div class="form-group">
+                <select type="text" class="form-control" name="speaker" >
+                <option value="youtube music">Youtube Music</option>
+                <option value="youtube vlf messages">Youtube VLF Messages</option>
+                <option value="youtube talkshow">Youtube Talkshow</option>
+                <option value="youtube movies">Youtube Movies</option>
+                </select>
+                <div class="validation"></div>
+              <span class="text-danger"><?php echo $category_error ?></span>
               </div>
 
               <div class="text-center"><button type="submit" name="url_links" class="btn btn-primary btn-lg">Add URL</button></div>
@@ -91,7 +102,7 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                <h3>LiveStreaming Url</h3>
+                <h3>Youtube Music </h3>
               </header>
               <div class="table-responsive">
                 <table class="table table-dark">
@@ -100,7 +111,7 @@
                  <th scope="col">SN</th>
                  <th>Url</th>
                  <th>Topic</th>
-                   <th>Speaker</th>
+                   <th>category</th>
                    <th>Delete</th>
                </tr>
                   </thead>
@@ -113,7 +124,118 @@
       <td style="color: red;" ><?= $row['topic'] ?></td>
       <td style="color: red;" ><?= $row['speaker'] ?></td>
        <td>
-          <form action="livestreaming.php?id=<?= $row['id'] ?>" method="POST">
+          <form action="youtubevideos.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="delete_livestreaming">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+
+            </section>
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Youtube VLF Messages</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Url</th>
+                 <th>Topic</th>
+                   <th>category</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(is_array($vlf_livestreaming_rows)){ ?>
+            <?php foreach($vlf_livestreaming_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?= $row['url'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+       <td>
+          <form action="youtubevideos.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="delete_livestreaming">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+
+            </section>
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Youtube Talkshow</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Url</th>
+                 <th>Topic</th>
+                   <th>category</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(is_array($talkshow_livestreaming_rows)){ ?>
+            <?php foreach($talkshow_livestreaming_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?= $row['url'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+       <td>
+          <form action="youtubevideos.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="delete_livestreaming">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+
+            </section>
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Youtube Movies</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Url</th>
+                 <th>Topic</th>
+                   <th>category</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(is_array($movies_livestreaming_rows)){ ?>
+            <?php foreach($movies_livestreaming_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?= $row['url'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+       <td>
+          <form action="youtubevideos.php?id=<?= $row['id'] ?>" method="POST">
               <button class="btn-danger" name="delete_livestreaming">Delete</button>
           </form>
       </td>

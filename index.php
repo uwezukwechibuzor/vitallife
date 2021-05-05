@@ -1,10 +1,12 @@
+
+
 <?php
  require_once "admin/function.php";
 
      global $db, $row, $rows, $gallery_rows, $row, $status, $id;
 	global  $events_rows, $status;
 
- global $db, $download_rows,  $status, $v, $videos_rows;
+ global $db, $downloads_rows,  $status, $v, $videos_rows;
 
 global $db, $livestreaming_rows,  $status, $blog_rows;
 
@@ -29,49 +31,48 @@ display_blogs_index();
 
 <?php require_once "header.php"; ?>
 
-
-<div class="fb-post" data-href="https://www.facebook.com/20531316728/posts/10154009990506729/" data-width="500"></div>
+<!-- <div class="fb-post" data-href="https://www.facebook.com/20531316728/posts/10154009990506729/" data-width="500"></div> -->
 <section class="hero-area hero-post-slides owl-carousel">
 
-<div class="single-hero-slide bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/vitalife2.jpg); width: 100%; object-fit:cover">
+<div class="single-hero-slide bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bac1.jpg); width: 100%; object-fit:cover">
 
 <div class="container">
 <div class="row">
 <div class="col-12">
 <div class="hero-slides-content">
-<h2 data-animation="fadeInUp" data-delay="100ms">Building The Hope</h2>
-<p data-animation="fadeInUp" data-delay="300ms">Learn about our mission, our beliefs, and the hope we have in Jesus.</p>
-<a href="about.php" class="btn crose-btn" data-animation="fadeInUp" data-delay="500ms">About Us</a>
+<h2 data-animation="fadeInUp" data-delay="100ms">Talent-Evangelists</h2>
+<p data-animation="fadeInUp" data-delay="300ms">Serving Jesus With Our Gifts and Talents.</p>
+<a href="about" class="btn crose-btn" data-animation="fadeInUp" data-delay="500ms">About Us</a>
 </div>
 </div>
 </div>
 </div>
 </div>
 
-<div class="single-hero-slide bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/vitalife1.jpg); width: 100%; object-fit:cover">
+<div class="single-hero-slide bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/ba4.jpg); width: 100%; object-fit:cover">
+
+<div class="container">
+<div class="row">
+<div class="col-12">
+<div class="hero-slides-content">
+<h2 data-animation="fadeInUp" data-delay="100ms">Raising a Generation </h2>
+<p data-animation="fadeInUp" data-delay="300ms">that will worship God in Spirit and in Truth.</p>
+<a href="contact" class="btn crose-btn" data-animation="fadeInUp" data-delay="500ms">Contact Us</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="single-hero-slide bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/b1.jpg); width: 100% object-fit:cover">
 
 <div class="container">
 <div class="row">
 <div class="col-12">
 <div class="hero-slides-content">
 <h2 data-animation="fadeInUp" data-delay="100ms">Making Jesus Known</h2>
-<p data-animation="fadeInUp" data-delay="300ms">Learn about our mission, our beliefs, and the hope we have in Jesus.</p>
-<a href="contact.php" class="btn crose-btn" data-animation="fadeInUp" data-delay="500ms">Contact Us</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="single-hero-slide bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/vitalife.png); width: 100% object-fit:cover">
-
-<div class="container">
-<div class="row">
-<div class="col-12">
-<div class="hero-slides-content">
-<h2 data-animation="fadeInUp" data-delay="100ms">Making Jesus Known</h2>
-<p data-animation="fadeInUp" data-delay="300ms">Learn about our mission, our beliefs, and the hope we have in Jesus.</p>
-<a href="member.php" class="btn crose-btn" data-animation="fadeInUp" data-delay="500ms">Become A Member</a>
+<p data-animation="fadeInUp" data-delay="300ms">Learn about our vision, our mission, and our faith in Jesus.</p>
+<a href="member" class="btn crose-btn" data-animation="fadeInUp" data-delay="500ms">Become A Member</a>
 </div>
 </div>
 </div>
@@ -130,14 +131,14 @@ display_blogs_index();
 </section>
 
 
-<section class="call-to-action-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/ba1.jpg)">
+<section class="call-to-action-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/back2.jpg)">
 <div class="container">
 <div class="row">
 <div class="col-12">
 <div class="call-to-action-content text-center">
-<h2 class="text-primary">What We Do</h2>
+<h2 class="text-primary">Our Vision</h2>
 <h4 class="text-light">Preaching The Gospel Of Jesus Christ With Our Gifts And Talents <br> We are One Family in Christ</h4>
-<a href="member.php" class="btn crose-btn btn-2">Become A Member</a>
+<a href="member" class="btn crose-btn btn-2">Become A Member</a>
 </div>
 </div>
 </div>
@@ -157,7 +158,7 @@ display_blogs_index();
 </div>
 </div>
 <div class="row justify-content-center">
-<?php if(is_array($download_rows)){ ?>
+<?php if(is_array($downloads_rows)){ ?>
 <?php foreach($downloads_rows as $row){ ?>
   <div class="col-12 col-sm-6 col-lg-4">
 <div class="single-latest-sermons mb-100">
@@ -196,10 +197,14 @@ display_blogs_index();
 
 <div class="single-latest-sermons mb-100">
 <div class="sermons-thumbnail">
-
-<video width="100%" height="auto" controls disablePictureInPicture controlsList="nodownload">
-  <source src="admin/<?= $row['video'] ?>" type="video/mp4">
-Your browser does not support the video tag.
+<video
+  class="lazy"
+  controls
+  width="100%"
+  data-src="admin/<?= $row['video'] ?>"
+  data-poster="https://ak.picdn.net/shutterstock/videos/23910163/thumb/1.jpg">
+  <source type="video/mp4"
+      data-src="admin/<?= $row['video'] ?>" />
 </video>
 
 
@@ -237,10 +242,11 @@ Your browser does not support the video tag.
 <div class="single-latest-sermons mb-100">
 <div class="sermons-thumbnail">
 
-<iframe width="100%" height="auto"
-src="<?= $row['url'] ?>">
-</iframe>
-
+<div class="wrapper">
+	<div class="youtube" data-embed="<?= $row['url'] ?>">
+		<div class="play-button"></div>
+	</div>
+</div>
 
 <!-- 
 <div class="sermons-date">
@@ -255,7 +261,7 @@ src="<?= $row['url'] ?>">
 </div> -->
 <a href="livestreaming_single.php?id=<?= $row['id'] ?>"><h4><?= $row['topic'] ?></h4></a>
  <div class="sermons-meta-data">
-<p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span><?= $row['speaker'] ?></span></p>
+<p><i class="" aria-hidden="true"></i> Category: <span><?= $row['speaker'] ?></span></p>
 <!-- <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span><?= $row['category'] ?></span></p> -->
 <p><i class="fa fa-clock-o" aria-hidden="true"></i><?= $row['time'] ?></span></p>
 </div>
@@ -312,6 +318,7 @@ src="<?= $row['url'] ?>">
 </div>
 
 <div class="find-out-more-btn">
+<a class="btn-primary" href="<?= $row['links'] ?>">Read More</a>
 </div>
 </div>
 
@@ -375,7 +382,7 @@ src="<?= $row['url'] ?>">
 <?php if(is_array($gallery_rows)){ ?>
 <?php foreach($gallery_rows as $row){ ?>
 <div class="single-gallery-area">
-<a href="admin/<?= $row['pic'] ?>" class="gallery-img" title="<?= $row['pic'] ?>">
+<a href="admin/<?= $row['pic'] ?>" class="gallery-img" title="<?= $row['links'] ?>">
 <img src="admin/<?= $row['pic'] ?>" alt="" style=" width: 100%; height: 200px; object-fit:cover" >
 </a>
 </div>
@@ -406,6 +413,7 @@ src="<?= $row['url'] ?>">
 </div>
 </div>
 </section> -->
+
 <br>
 <?php 
   require_once "footer.php";

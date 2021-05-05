@@ -68,6 +68,7 @@ require_once "header.php";
 </div>
 
 <div class="find-out-more-btn">
+<a class="btn-primary" href="<?= $row['links'] ?>">Read More</a>
 </div>
 </div>
 

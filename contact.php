@@ -34,7 +34,11 @@ require_once "header.php";
 </div>
 </div>
 </div>
-
+<?php if($mailsent){ ?>
+<div class="alert alert-success container" role="alert">
+<h5 style='text-align:center'><?php echo $mailsent ?></h5>
+</div>
+<?php } ?>
 
 <div class="map-area mt-30">
   <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31721.19663919481!2d5.621739739550781!3d6.3746828000000075!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1040d3a5db6bb105%3A0x7deaf3f57168a8f2!2sVITAL%20LIFE%20FOUNDATION!5e0!3m2!1sen!2sus!4v1618912201053!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -50,7 +54,7 @@ require_once "header.php";
 <div class="col-12 col-md-4">
 <div class="contact-content contact-information">
 <h4>Contact</h4>
-<p><a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="acc5c2cac382c8c9c9decfdec9cdd8c5dac9eccbc1cdc5c082cfc3c1">Vitalifefoundation @yahoo.com</a></p>
+<p><a href="mailto:info@vitalifefoundation.ng" class="__cf_email__" data-cfemail="acc5c2cac382c8c9c9decfdec9cdd8c5dac9eccbc1cdc5c082cfc3c1">info@vitalifefoundation.ng</a></p>
 <p>+2349040236583</p>
 </div>
 </div>
@@ -88,10 +92,8 @@ require_once "header.php";
  </div>
 <div class="row">
 <div class="col-12">
-<span style="background-color: blue; color:white"><?php echo $mailsent ?></span>
- 
 <div class="contact-form-area">
-<form action="#" method="post">
+<form action="contact" method="post">
 <div class="row">
 <div class="col-12 col-lg-4">
 <div class="form-group">

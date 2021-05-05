@@ -24,8 +24,7 @@ require_once "header.php";
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-<li class="breadcrumb-item"><a href="livestreaming.php">LiveStreaming</a></li>
-<li class="breadcrumb-item active" aria-current="page">Streaming Details</li>
+<li class="breadcrumb-item"><a href="">YouTube Details</a></li>
 </ol>
 </nav>
 </div>
@@ -45,9 +44,12 @@ require_once "header.php";
 
 <div class="post-content">
 <h2 class="post-title mb-30"><?= $livestreaming_row['topic'] ?></h2>
-<iframe width="100%" height="500px"
-src="<?= $livestreaming_row['url'] ?>">
-</iframe>
+
+<div class="wrapper">
+	<div class="youtube" data-embed="<?= $livestreaming_row['url'] ?>">
+		<div class="play-button"></div>
+	</div>
+</div>
 
 <div class="catagory-share-meta d-flex flex-wrap justify-content-between align-items-center">
 

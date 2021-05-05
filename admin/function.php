@@ -281,7 +281,7 @@ function deleteAdmin($request){
                
                     //execute
                     if (mysqli_stmt_execute($stmt)) {
-                        $code = "success";
+                       // $code = "success";
                     }
                 }                     
 
@@ -290,21 +290,21 @@ function deleteAdmin($request){
                                  $mail = new PHPMailer(true);
                            
                                  try {
-                                     $mail->SMTPDebug = 2;
+                                     $mail->SMTPDebug = 0;
                                      $mail->isSMTP();
-                                     $mail->Host       = 'smtp.mailtrap.io';
+                                     $mail->Host       = 'mail.vitalifefoundation.ng';
                                      $mail->SMTPAuth   = true;
-                                     $mail->Username   = '07ec5cc6c28678';
-                                     $mail->Password   = 'c51b53728d1e23';
+                                     $mail->Username   = 'info@vitalifefoundation.ng';
+                                     $mail->Password   = 'CHI389221261518chi//';
                                      $mail->SMTPSecure = 'tls';
-                                     $mail->Port       = 2525;
-                                     $mail->setFrom('vitalife@gmail.com');
+                                     $mail->Port       = 587;
+                                     $mail->setFrom('info@vitalifefoundation.ng');
                                      $mail->addAddress($emaill);
                                      $mail->addAddress($emaill);
                                 
                                      $mail->isHTML(true);
-                                     $mail->Subject = 'reset your password';
-                                     $mail->Body    = $code;
+                                     $mail->Subject = 'Reset Password';
+                                     $mail->Body    = 'Use the Code to change Your Password'.' '.'<b>'.$code.'</b><br>'.'It Expires after 5minutes';
                                      $mail->AltBody = 'Body in plain text for non-HTML mail clients';
                                      $mail->send();
                                      $mailsent = "Mail has been sent successfully!";
@@ -314,7 +314,8 @@ function deleteAdmin($request){
                          
                                  //use check to diplay the next form
                                  $check = true;
-                                 header("location: forgotpassword.php?check=$code&mailsent=$mailsent");
+                                 $co= bin2hex(random_bytes(30));
+                                 header("location: forgotpassword.php?check=$code&check=$co&mailsent=$mailsent");
 
                                                       
                              }
@@ -442,6 +443,7 @@ function deleteAdmin($request){
 
 
              //meet our team
+             //twitter was replaced with department
              function meet_our_team($request)
              {
                  global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $fullname, $position, $success, $facebook, $twitter;
@@ -479,7 +481,7 @@ function deleteAdmin($request){
                                         } else {
                         
                                  //Insert to database
-                             $sql = "INSERT INTO meet_our_team (full_name, position, pic, facebook, twitter) VALUES (?,?,?,?,?)";
+                             $sql = "INSERT INTO meet_our_team (full_name, position, pic, facebook, department) VALUES (?,?,?,?,?)";
                      
                              if ($stmt = mysqli_prepare($db, $sql)) {
                               
@@ -740,7 +742,7 @@ function delete_gallery($request){
 //Create Admin Users by the Super Admin
 function member($request)
 {
-    global $db, $email_error, $email, $phone_err, $fullname, $fullname_err, $success,  $phone, $err;
+    global $db, $email_error, $email, $phone_err, $fullname, $fullname_err, $success,  $phone, $err, $state, $state_err, $country, $country_err, $city, $city_err, $talent;
 
              
     if (empty(trim($request['email']))) {
@@ -756,6 +758,24 @@ function member($request)
     } else {
         $fullname = $request['full_name'];
     }
+    if (empty(trim($request['country']))) {
+        $country_err = "the full name field is required";
+    } else {
+        $country = $request['country'];
+    }
+    if (empty(trim($request['state']))) {
+        $state_err = "the full name field is required";
+    } else {
+        $state = $request['state'];
+    }
+    if (empty(trim($request['city']))) {
+        $city_err = "the full name field is required";
+    } else {
+        $city = $request['city'];
+    }
+
+    $talent = $request['talents'];
+
     if (empty(trim($request['phone_no']))) {
         $phone_err = "the Phone Number field is required";
     } else {
@@ -763,7 +783,7 @@ function member($request)
     }
 
     //if no error is found
-    if (empty($email_error) && empty($fullname_err) && empty($phone_err)) {
+    if (empty($email_error) && empty($fullname_err) && empty($phone_err) && empty($country_err) && empty($state_err) && empty($city_err)) {
         //check if email exist already
         $sql = "SELECT email, phone_no FROM member WHERE email =? || phone_no =?";
      
@@ -779,13 +799,12 @@ function member($request)
             } else {
                 
                 //insert details into the detabase
-                $sql = "INSERT INTO member (full_name, email, phone_no) VALUES (?,?,?)";
+                $sql = "INSERT INTO member (full_name, email, phone_no, country, state, city, talents) VALUES (?,?,?,?,?,?,?)";
                 
                 if($stmt = mysqli_prepare($db, $sql)){
                     
                 //bind param
-             mysqli_stmt_bind_param($stmt, "sss", $fullname, $email,  $phone);
-               
+             mysqli_stmt_bind_param($stmt, "sssssss", $fullname, $email,  $phone, $country, $state, $city, $talent);
                 //execute
                if(mysqli_stmt_execute($stmt)){
                 $success = "Thank you $fullname for choosing to be a member";
@@ -862,17 +881,17 @@ function member($request)
                                 $mail = new PHPMailer(true);
                                           
                                 try {
-                                    $mail->SMTPDebug = 2;
+                                    $mail->SMTPDebug = 0;
                                     $mail->isSMTP();
-                                    $mail->Host       = 'smtp.mailtrap.io';
+                                    $mail->Host       = 'mail.vitalifefoundation.ng';
                                     $mail->SMTPAuth   = true;
-                                    $mail->Username   = '07ec5cc6c28678';
-                                    $mail->Password   = 'c51b53728d1e23';
+                                    $mail->Username   = 'info@vitalifefoundation.ng';
+                                    $mail->Password   = 'CHI389221261518chi//';
                                     $mail->SMTPSecure = 'tls';
-                                    $mail->Port       = 2525;
+                                    $mail->Port       = 587;
                                     $mail->setFrom($email);
-                                    $mail->addAddress('Vitallife@gmail.com');
-                                    $mail->addAddress('vitallife@gmail.com');
+                                    $mail->addAddress('info@vitalifefoundation.ng');
+                                    $mail->addAddress('info@vitalifefoundation.ng');
                                                
                                     $mail->isHTML(true);
                                     $mail->Subject = $subject;
@@ -893,13 +912,14 @@ function member($request)
                   //events
                   function events($request)
                   {
-                      global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $address, $details, $file_err, $topic_error,  $time_error, $address_error, $details_error, $date, $date_error;
+                      global $db,  $file, $fileName, $fileTmpName, $fileSize, $fileError, $fileType, $fileExt, $fileActualExt, $allowed, $error, $image,  $fileNameNew, $fileDestination, $position, $success, $topic, $time, $address, $details, $file_err, $topic_error,  $time_error, $address_error, $details_error, $date, $date_error, $links,$links_error;
                      
                       $topic = $request['topic'];
                       $time = $request['timing'];
                       $address = $request['address'];
                       $details = $request['details'];
                       $date = $request['date'];
+                      $links = $request['links'];
 
                       if (empty($topic)) {
                           $topic_error = "This field is required";
@@ -915,6 +935,11 @@ function member($request)
                             
                       if (empty($date)) {
                           $date_error = "This field is required";
+                      }
+                            
+                            
+                      if (empty($links)) {
+                          $links_error = "This field is required";
                       }
                             
                       if (empty($details)) {
@@ -946,12 +971,12 @@ function member($request)
                                       } else {
                              
                                       //Insert to database
-                                          $sql = "INSERT INTO events (topic, timing, address, details, pic, date) VALUES (?,?,?,?,?,?)";
+                                          $sql = "INSERT INTO events (topic, timing, address, details, pic, date, links) VALUES (?,?,?,?,?,?,?)";
                           
                                           if ($stmt = mysqli_prepare($db, $sql)) {
                                    
                                      //bind values to the prepared statement
-                                              mysqli_stmt_bind_param($stmt, "ssssss", $topic, $time, $address, $details, $fileNameNew, $date);
+                                              mysqli_stmt_bind_param($stmt, "sssssss", $topic, $time, $address, $details, $fileNameNew, $date, $links);
                                               if (mysqli_stmt_execute($stmt)) {
                                                   $success = " Events Added Successfully";
                                               }
@@ -1178,22 +1203,32 @@ function delete_events($request){
       
                    //file upload file audio
                    $file = $_FILES['file1'];
+                   $file1 = $_FILES['file'];
                    $fileName = $_FILES['file1']['name'];
+                   $fileName1 = $_FILES['file']['name'];
                    $fileTmpName = $_FILES['file1']['tmp_name'];
+                   $fileTmpName1 = $_FILES['file']['tmp_name'];
                    $fileSize= $_FILES['file1']['size'];
+                   $fileSize1= $_FILES['file']['size'];
                    $fileError = $_FILES['file1']['error'];
+                   $fileError1 = $_FILES['file']['error'];
                    $fileType = $_FILES['file1']['type'];
+                   $fileType1 = $_FILES['file']['type'];
 
                    $fileExt = explode('.', $fileName);
+                   $fileExt1 = explode('.', $fileName1);
                    $fileActualExt = strtolower(end($fileExt));
+                   $fileActualExt1 = strtolower(end($fileExt1));
 
                    $allowed = array('MP4','MOV', 'AVI', 'webm');
+                   $allowed1 = array('png','jpg', 'jpeg');
 
 
                   if($fileName){
                         if ($fileError === 0) {
                             if ($fileSize < 100000000000000000) {
                                 move_uploaded_file($fileTmpName, $fileName);
+                                move_uploaded_file($fileTmpName1, $fileName1);
 
                                 if (empty($fileName)) {
                                     $file_err = "No file Was choosen";
@@ -1202,12 +1237,12 @@ function delete_events($request){
        
            
                     //Insert to database
-                                    $sql = "INSERT INTO videos (topic, speaker, category, video) VALUES (?,?,?,?)";
+                                    $sql = "INSERT INTO videos (topic, speaker, category, video, pic) VALUES (?,?,?,?,?)";
         
                                     if ($stmt = mysqli_prepare($db, $sql)) {
                  
                    //bind values to the prepared statement
-                                        mysqli_stmt_bind_param($stmt, "ssss", $topic, $speaker, $category, $fileName);
+                                        mysqli_stmt_bind_param($stmt, "sssss", $topic, $speaker, $category, $fileName, $fileName1);
                                         if (mysqli_stmt_execute($stmt)) {
                                             $success = " Video Added Successfully";
                                         }
@@ -1222,12 +1257,13 @@ function delete_events($request){
          
               //display downloads
                 function display_downloads(){
-                    global $db, $downloads_rows,  $status;
+                    global $db, $downloads_rows,  $status, $category;
                     $status = "true";
-                        $sql = "SELECT  * FROM downloads WHERE status =? ORDER BY id DESC";
+                    $category = 'music audios';
+                        $sql = "SELECT  * FROM downloads WHERE status =? AND category =? ORDER BY id DESC";
                         if ($stmt = mysqli_prepare($db, $sql)) {
                             // Bind variables to the prepared statement as parameters
-                            mysqli_stmt_bind_param($stmt, "s", $status);
+                            mysqli_stmt_bind_param($stmt, "ss", $status, $category);
                             // Attempt to execute the prepared statement
                             if (mysqli_stmt_execute($stmt)) {
                                 // Store result
@@ -1235,6 +1271,47 @@ function delete_events($request){
                                 // Check if data exists, if yes display data
                                 if (mysqli_num_rows($result)) {
                                     $downloads_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        
+                                }
+                            }
+                        }
+                    }
+              
+                function display_general_audios(){
+                    global $db, $general_rows,  $status, $category;
+                    $status = "true";
+                    $category = 'general message audios';
+                        $sql = "SELECT  * FROM downloads WHERE status =? AND category =? ORDER BY id DESC";
+                        if ($stmt = mysqli_prepare($db, $sql)) {
+                            // Bind variables to the prepared statement as parameters
+                            mysqli_stmt_bind_param($stmt, "ss", $status, $category);
+                            // Attempt to execute the prepared statement
+                            if (mysqli_stmt_execute($stmt)) {
+                                // Store result
+                                $result =  mysqli_stmt_get_result($stmt);
+                                // Check if data exists, if yes display data
+                                if (mysqli_num_rows($result)) {
+                                    $general_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        
+                                }
+                            }
+                        }
+                    }
+                function display_vlf_audios(){
+                    global $db, $vlf_rows,  $status, $category;
+                    $status = "true";
+                    $category = 'vlf message audios';
+                        $sql = "SELECT  * FROM downloads WHERE status =? AND category =? ORDER BY id DESC";
+                        if ($stmt = mysqli_prepare($db, $sql)) {
+                            // Bind variables to the prepared statement as parameters
+                            mysqli_stmt_bind_param($stmt, "ss", $status, $category);
+                            // Attempt to execute the prepared statement
+                            if (mysqli_stmt_execute($stmt)) {
+                                // Store result
+                                $result =  mysqli_stmt_get_result($stmt);
+                                // Check if data exists, if yes display data
+                                if (mysqli_num_rows($result)) {
+                                    $vlf_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         
                                 }
                             }
@@ -1262,13 +1339,15 @@ function delete_events($request){
                         }
                     }
               
+                       //for music videos
                 function display_downloads_videos(){
                     global $db, $videos_rows,  $status;
                     $status = "true";
-                        $sql = "SELECT  * FROM videos WHERE status =? ORDER BY id DESC";
+                    $category="music videos";
+                        $sql = "SELECT  * FROM videos WHERE status =? AND category =? ORDER BY id DESC";
                         if ($stmt = mysqli_prepare($db, $sql)) {
                             // Bind variables to the prepared statement as parameters
-                            mysqli_stmt_bind_param($stmt, "s", $status);
+                            mysqli_stmt_bind_param($stmt, "ss", $status, $category);
                             // Attempt to execute the prepared statement
                             if (mysqli_stmt_execute($stmt)) {
                                 // Store result
@@ -1281,6 +1360,70 @@ function delete_events($request){
                             }
                         }
                     }
+                function display_general_videos(){
+                    global $db, $general_videos_rows,  $status;
+                    $status = "true";
+                    $category = "general message videos";
+                        $sql = "SELECT  * FROM videos WHERE status =? AND category=? ORDER BY id DESC";
+                        if ($stmt = mysqli_prepare($db, $sql)) {
+                            // Bind variables to the prepared statement as parameters
+                            mysqli_stmt_bind_param($stmt, "ss", $status, $category);
+                            // Attempt to execute the prepared statement
+                            if (mysqli_stmt_execute($stmt)) {
+                                // Store result
+                                $result =  mysqli_stmt_get_result($stmt);
+                                // Check if data exists, if yes display data
+                                if (mysqli_num_rows($result)) {
+                                    $general_videos_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        
+                                }
+                            }
+                        }
+                    }
+
+                function display_vlf_videos(){
+                    global $db, $vlf_videos_rows,  $status;
+                    $status = "true";
+                    $category = "vlf message videos";
+                        $sql = "SELECT  * FROM videos WHERE status =? AND category=? ORDER BY id DESC";
+                        if ($stmt = mysqli_prepare($db, $sql)) {
+                            // Bind variables to the prepared statement as parameters
+                            mysqli_stmt_bind_param($stmt, "ss", $status, $category);
+                            // Attempt to execute the prepared statement
+                            if (mysqli_stmt_execute($stmt)) {
+                                // Store result
+                                $result =  mysqli_stmt_get_result($stmt);
+                                // Check if data exists, if yes display data
+                                if (mysqli_num_rows($result)) {
+                                    $vlf_videos_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        
+                                }
+                            }
+                        }
+                    }
+
+                function display_movies_videos(){
+                    global $db, $movies_videos_rows,  $status;
+                    $status = "true";
+                    $category = "movies";
+                        $sql = "SELECT  * FROM videos WHERE status =? AND category=? ORDER BY id DESC";
+                        if ($stmt = mysqli_prepare($db, $sql)) {
+                            // Bind variables to the prepared statement as parameters
+                            mysqli_stmt_bind_param($stmt, "ss", $status, $category);
+                            // Attempt to execute the prepared statement
+                            if (mysqli_stmt_execute($stmt)) {
+                                // Store result
+                                $result =  mysqli_stmt_get_result($stmt);
+                                // Check if data exists, if yes display data
+                                if (mysqli_num_rows($result)) {
+                                    $movies_videos_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        
+                                }
+                            }
+                        }
+                    }
+
+
                 function display_downloads_videos_index(){
                     global $db, $videos_rows,  $status;
                     $status = "true";
@@ -1305,11 +1448,11 @@ function delete_events($request){
                     //displaying youtube videos
                     function display_liveStreaming(){
                         global $db, $livestreaming_rows,  $status;
-                        $status = "true";
-                            $sql = "SELECT  * FROM livestreaming WHERE status =? ORDER BY id DESC";
+                        $speaker = "youtube music";
+                            $sql = "SELECT  * FROM livestreaming WHERE speaker =? ORDER BY id DESC";
                             if ($stmt = mysqli_prepare($db, $sql)) {
                                 // Bind variables to the prepared statement as parameters
-                                mysqli_stmt_bind_param($stmt, "s", $status);
+                                mysqli_stmt_bind_param($stmt, "s", $speaker);
                                 // Attempt to execute the prepared statement
                                 if (mysqli_stmt_execute($stmt)) {
                                     // Store result
@@ -1317,6 +1460,63 @@ function delete_events($request){
                                     // Check if data exists, if yes display data
                                     if (mysqli_num_rows($result)) {
                                         $livestreaming_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+                    function display_youtube_vlf(){
+                        global $db, $vlf_livestreaming_rows,  $status;
+                        $speaker = "youtube vlf messages";
+                            $sql = "SELECT  * FROM livestreaming WHERE speaker =? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $speaker);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $vlf_livestreaming_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+                    function display_youtube_talkshow(){
+                        global $db, $talkshow_livestreaming_rows,  $status;
+                        $speaker = "Youtube Talkshow";
+                            $sql = "SELECT  * FROM livestreaming WHERE speaker =? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $speaker);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $talkshow_livestreaming_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                        }
+                    function display_youtube_movies(){
+                        global $db, $movies_livestreaming_rows,  $status;
+                        $speaker = "Youtube movies";
+                            $sql = "SELECT  * FROM livestreaming WHERE speaker =? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $speaker);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $movies_livestreaming_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             
                                     }
                                 }
@@ -1425,7 +1625,7 @@ function delete_events($request){
                    if($stmt = mysqli_prepare($db, $sql)){
                         mysqli_stmt_bind_param($stmt, "i", $id);
                         if(mysqli_stmt_execute($stmt)){
-                            header("location:livestreaming.php");
+                            header("location:youtubevideos.php");
                         }
                    }
                }
@@ -1855,7 +2055,7 @@ if (file_exists($filepath)) {
                         }
                     }
             
-                     //member
+                     //blog comments
                      function display_comment_admin(){
                         global $db, $rows, $row, $status;
                         $status = "true";
@@ -1959,9 +2159,69 @@ if (file_exists($filepath)) {
                             
                             }
                 
-
-
-
+                      //general search button
+                      function general_search($request){
+                        global $db, $search_rows, $row, $search;
+                        $search = $request['search'].'%';
+                             $sql = "SELECT * FROM downloads
+                             WHERE topic LIKE  ? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $search);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $search_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                      }
+                    
+                      function search($request){
+                        global $db, $v_rows, $row, $search;
+                        $search = $request['search'].'%';
+                             $sql = "SELECT * FROM videos
+                             WHERE topic LIKE  ? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $search);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $v_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                      }
+                      function blog_search($request){
+                        global $db, $search_rows, $row, $search;
+                        $search = $request['search'].'%';
+                             $sql = "SELECT * FROM blog
+                             WHERE title LIKE  ? ORDER BY id DESC";
+                            if ($stmt = mysqli_prepare($db, $sql)) {
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "s", $search);
+                                // Attempt to execute the prepared statement
+                                if (mysqli_stmt_execute($stmt)) {
+                                    // Store result
+                                    $result =  mysqli_stmt_get_result($stmt);
+                                    // Check if data exists, if yes display data
+                                    if (mysqli_num_rows($result)) {
+                                        $search_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            
+                                    }
+                                }
+                            }
+                      }
+                    
 
 
 

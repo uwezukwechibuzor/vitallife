@@ -55,19 +55,30 @@ display_member();
                  <th scope="col">SN</th>
                  <th>Full name</th>
                    <th>Email</th>
+                   <th>Country</th>
+                   <th>State</th>
+                   <th>City</th>
+                   <th>Talents</th>
                    <th scope="col">Phone No.</th>
                    <th scope="col">Created_at</th>
                </tr>
                   </thead>
                   <tbody>
+     <?php if(is_array($rows)){ ?>             
     <?php foreach($rows as $row){ ?>
     <tr>
       <th scope="row"><?= $row['id'] ?></th>
       <td style="color: red;" ><?= $row['full_name'] ?></td>
       <td style="color: red;" ><?= $row['email'] ?></td>
+      <td style="color: red;" ><?= $row['country'] ?></td>
+      <td style="color: red;" ><?= $row['state'] ?></td>
+      <td style="color: red;" ><?= $row['city'] ?></td>
+      <td style="color: red;" ><?= $row['talents'] ?></td>
       <td style="color: red;" ><?= $row['phone_no'] ?></td>
       <td style="color: red;" ><?= $row['created_at'] ?></td>
     </tr>
+    <?php } ?>
+    <?php }else{ ?>
     <?php } ?>
   </tbody>
                 </table>

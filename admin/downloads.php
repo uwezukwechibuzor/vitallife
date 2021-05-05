@@ -7,7 +7,7 @@
 
 
 
-  global $downloads_rows,  $status, $videos_rows, $id, $rows, $row;
+  global $downloads_rows,  $status, $videos_rows, $id, $rows, $row, $general_rows, $vlf_rows, $general_videos_rows, $vlf_videos_rows, $movies_videos_rows;
   
    
 if(isset($_POST['audio'])){
@@ -35,7 +35,12 @@ if(isset($_POST['video'])){
 }
 
 display_downloads();
+display_general_audios();
+display_vlf_audios();
 display_downloads_videos();
+display_general_videos();
+display_vlf_videos();
+display_movies_videos();
 
 //echo ini_get('post_max_size');
 //echo $fileNameNew2;
@@ -80,8 +85,17 @@ display_downloads_videos();
                 <div class="validation"></div>
               <span class="text-danger"><?php echo $speaker_error ?></span>
               </div>
+             <label for="">Category</label>
               <div class="form-group">
-                <input type="text" class="form-control" name="category" placeholder="Category" />
+                <select type="text" class="form-control" name="category" >
+                <option value="music audios">Music Audios</option>
+                <option value="music videos">Music Videos</option>
+                <option value="general message audios">General Message Audios</option>
+                <option value="general message videos">General Message Videos</option>
+                <option value="vlf message audios">VLF message Audios</option>
+                <option value="vlf message videos">VLF Message Videos</option>
+                <option value="movies">Movies</option>
+                </select>
                 <div class="validation"></div>
               <span class="text-danger"><?php echo $category_error ?></span>
               </div>
@@ -90,7 +104,8 @@ display_downloads_videos();
                 <div class="validation"></div>
               <span class="text-danger"></span>
               </div> -->
-              <span class="text-danger">* upload files in MP4, MP3, WAV, WMA, AAC, M4A, jpg, jpeg, png</span>
+              <span class="text-danger">* upload files in MP4, MP3, WAV, WMA, AAC, M4A, jpg, jpeg, png</span><br>
+              <span class="text-danger">* file must be less than 90mb</span>
               <div class="form-group"><label for="">Upload An Image</label>
                 <input type="file" name="file">
               </div>
@@ -104,6 +119,8 @@ display_downloads_videos();
               <div class="text-center"><button type="submit" name="audio" class="btn btn-primary btn-lg">Add Audio</button></div>
                 <hr>
               <div class="text-center"><button type="submit" name="video" class="btn btn-primary btn-lg">Add Video</button></div>
+                <hr>
+            
             </form>
           </div>
 
@@ -127,7 +144,7 @@ display_downloads_videos();
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                <h3>Downloads - Audios</h3>
+                <h3>Downloads - Music Audios</h3>
               </header>
               <div class="table-responsive">
                 <table class="table table-dark">
@@ -145,6 +162,7 @@ display_downloads_videos();
                </tr>
                   </thead>
                   <tbody>
+                  <?php if(is_array($downloads_rows)){ ?>
            <?php foreach($downloads_rows as $row){ ?>       
     <tr>
       <th scope="row"><?= $row['id'] ?></th>
@@ -170,6 +188,114 @@ Your browser does not support the audio element.
       </td>
     </tr>
   <?php } ?>
+  <?php }else { ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+
+            </section>
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Downloads - General Message Audios</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Name</th>
+                 <th>Topic</th>
+                   <th>Speaker</th>
+                   <th>Category</th>
+                   <th>Time</th>
+                   <th scope="col">Pic</th>
+                   <th scope="col">Audios</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(is_array($general_rows)){ ?>
+           <?php foreach($general_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?=  $row['audio'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+      <td style="color: red;" ><?= $row['category'] ?></td>
+      <td style="color: red;" ><?= $row['time'] ?></td>
+      <td><img src="<?= $row['pic'] ?>" alt="" height="50px" width="80px"></td>
+      <td>
+      <a href="<?= $row['audio'] ?>">
+      <audio controls style="width: 150px;">
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="<?= $row['audio'] ?>" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+</a>
+      </td>
+       <td>
+          <form action="downloads.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="audio">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+
+            </section>
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Downloads - VLF Message Audios</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Name</th>
+                 <th>Topic</th>
+                   <th>Speaker</th>
+                   <th>Category</th>
+                   <th>Time</th>
+                   <th scope="col">Pic</th>
+                   <th scope="col">Audios</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+           <?php if(is_array($vlf_rows)){ ?>       
+           <?php foreach($vlf_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?=  $row['audio'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+      <td style="color: red;" ><?= $row['category'] ?></td>
+      <td style="color: red;" ><?= $row['time'] ?></td>
+      <td><img src="<?= $row['pic'] ?>" alt="" height="50px" width="80px"></td>
+      <td>
+      <a href="<?= $row['audio'] ?>">
+      <audio controls style="width: 150px;">
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="<?= $row['audio'] ?>" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+</a>
+      </td>
+       <td>
+          <form action="downloads.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="audio">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else { ?>
+  <?php } ?>
   </tbody>
                 </table>
               </div>
@@ -179,7 +305,7 @@ Your browser does not support the audio element.
 
             <section class="panel">
               <header class="panel-heading">
-                <h3>Downloads - Videos</h3>
+                <h3>Downloads -Music Videos</h3>
               </header>
               <div class="table-responsive">
                 <table class="table table-dark">
@@ -196,6 +322,7 @@ Your browser does not support the audio element.
                </tr>
                   </thead>
                   <tbody>
+              <?php if(is_array($videos_rows)){ ?>    
            <?php foreach($videos_rows as $row){ ?>       
     <tr>
       <th scope="row"><?= $row['id'] ?></th>
@@ -221,11 +348,171 @@ Your browser does not support the video tag.
       </td>
     </tr>
   <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
   </tbody>
                 </table>
               </div>
 
             </section>
+
+
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Downloads -General Messages Videos</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Name</th>
+                 <th>Topic</th>
+                   <th>Speaker</th>
+                   <th>Category</th>
+                   <th>Time</th>
+                   <th scope="col">Videos</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+              <?php if(is_array($general_videos_rows)){ ?>    
+           <?php foreach($general_videos_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?= $row['video'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+      <td style="color: red;" ><?= $row['category'] ?></td>
+      <td style="color: red;" ><?= $row['time'] ?></td>
+      <td>
+      <a href="<?= $row['video'] ?>">
+      <video width="210" height="180" controls>
+  <source src="<?= $row['video'] ?>" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</a>
+
+      </td>
+       <td>
+          <form action="downloads.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="video">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+</section>
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Downloads - VLF Message Videos</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Name</th>
+                 <th>Topic</th>
+                   <th>Speaker</th>
+                   <th>Category</th>
+                   <th>Time</th>
+                   <th scope="col">Videos</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(is_array($vlf_videos_rows)){ ?>
+           <?php foreach($vlf_videos_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?= $row['video'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+      <td style="color: red;" ><?= $row['category'] ?></td>
+      <td style="color: red;" ><?= $row['time'] ?></td>
+      <td>
+      <a href="<?= $row['video'] ?>">
+      <video width="210" height="180" controls>
+  <source src="<?= $row['video'] ?>" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</a>
+
+      </td>
+       <td>
+          <form action="downloads.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="video">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+</section>
+            <section class="panel">
+              <header class="panel-heading">
+                <h3>Downloads - Movies</h3>
+              </header>
+              <div class="table-responsive">
+                <table class="table table-dark">
+                  <thead>
+                  <tr>
+                 <th scope="col">SN</th>
+                 <th>Name</th>
+                 <th>Topic</th>
+                   <th>Speaker</th>
+                   <th>Category</th>
+                   <th>Time</th>
+                   <th scope="col">Videos</th>
+                   <th>Delete</th>
+               </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(is_array($movies_videos_rows)){ ?>
+           <?php foreach($movies_videos_rows as $row){ ?>       
+    <tr>
+      <th scope="row"><?= $row['id'] ?></th>
+      <td style="color: red;" ><?= $row['video'] ?></td>
+      <td style="color: red;" ><?= $row['topic'] ?></td>
+      <td style="color: red;" ><?= $row['speaker'] ?></td>
+      <td style="color: red;" ><?= $row['category'] ?></td>
+      <td style="color: red;" ><?= $row['time'] ?></td>
+      <td>
+      <a href="<?= $row['video'] ?>">
+      <video width="210" height="180" controls>
+  <source src="<?= $row['video'] ?>" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+</a>
+
+      </td>
+       <td>
+          <form action="downloads.php?id=<?= $row['id'] ?>" method="POST">
+              <button class="btn-danger" name="video">Delete</button>
+          </form>
+      </td>
+    </tr>
+  <?php } ?>
+  <?php }else{ ?>
+  <?php } ?>
+  </tbody>
+                </table>
+              </div>
+</section>
+
+           
+
           </div>
         </div>
 </div>

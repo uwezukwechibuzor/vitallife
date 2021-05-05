@@ -30,7 +30,8 @@ require_once "header.php";
 <div class="col-12">
 <div class="section-heading">
 <h2>Partner With Us</h2>
-<span class="text-danger"><sup>*</sup>All fields must be filled</span>
+<h3>A</h3>
+<!-- <span class="text-danger"><sup>*</sup>All fields must be filled</span>
 </div>
 </div>
  </div>
@@ -63,18 +64,12 @@ require_once "header.php";
 <input name="amount" type="number" class="form-control" id="contact-number" placeholder="Amount">
 </div>
 </div>
-<div class="col-12">
-<!-- <div class="form-group">
-<label for="message">Message*:</label>
-<textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-<span style="background-color: white; color:red"></span>
-</div> -->
-</div>
+
 <div class="col-12 text-center">
 <button type="submit" name="submit" class="btn crose-btn mt-15">Submit</button>
 </div>
 </div>
-</form>
+</form> -->
 </div>
 </div>
 </div>
